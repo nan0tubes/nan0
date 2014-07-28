@@ -1,7 +1,15 @@
 
-#ifdef FW_SIMPLE_MUTEX
+#ifndef __N0_MUTEX_H__
+#define __N0_MUTEX_H__
 
-struct fwMutex 
+namespace n0
+{
+
+#ifdef N0_SIMPLE_MUTEX
+
+
+
+struct n0Mutex 
 {
 	bool isLocked;
 	u32 name;	
@@ -9,7 +17,7 @@ struct fwMutex
 
 #else
 
-struct fwMutex 
+struct n0Mutex 
 {
 	//Semaphores
 	u32 name;	
@@ -18,9 +26,14 @@ struct fwMutex
 #endif
 
 
-fwMutex *fwMutex_Create(char * mutexName );
-void fwMutex_Destroy(fwMutex *pMutex);
-void fwMutex_Lock(fwMutex *pMutex);
-bool fwMutex_IsLocked(fwMutex *pMutex);
-void fwMutex_Unlock(fwMutex *pMutex);
-bool fwMutex_TryLock(fwMutex *pMutex);
+n0Mutex *n0Mutex_Create(char * mutexName );
+void n0Mutex_Destroy(n0Mutex *pMutex);
+void n0Mutex_Lock(n0Mutex *pMutex);
+bool n0Mutex_IsLocked(n0Mutex *pMutex);
+void n0Mutex_Unlock(n0Mutex *pMutex);
+bool n0Mutex_TryLock(n0Mutex *pMutex);
+
+
+};
+
+#endif

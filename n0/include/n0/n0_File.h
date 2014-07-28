@@ -3,7 +3,11 @@
 #ifndef __FW_FILE_H__
 #define __FW_FILE_H__
 
-struct fwFileSection
+
+namespace n0
+{
+
+struct n0FileSection
 {
 	u32 name;			// indentifer to the section.
 	u32 size; 
@@ -14,17 +18,20 @@ struct fwFileSection
 	u32 type;			// Type of file
 };
 
-struct fwFileHeader
+struct n0FileHeader
 {
 	u32 sectionCount;
 };
-struct fwPack
+struct n0Pack
 {
 	byte * pData;
-	std::vector<fwFileSection> sections;
+	std::vector<n0FileSection> sections;
 	FILE * pFile;
 };
 ErrorCode OpenPack(const char *path);
 
+
+
+};
 
 #endif //__FW_FILE_H__

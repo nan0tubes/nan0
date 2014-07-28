@@ -1,8 +1,12 @@
 #ifndef __DELAYTIMER_H__
 #define __DELAYTIMER_H__
 
+
+namespace n0
+{
+
 template <u32 _MAX_DELAYS>
-class fwDelayTimer: public IUpdateable
+class n0DelayTimer: public IUpdateable
 {
 	struct SDelay
 	{
@@ -16,10 +20,10 @@ class fwDelayTimer: public IUpdateable
 		SDelay():timeRemaining(0),delayID(0),expired(0),skip(0),pUserData(NULL) {}
 	};
 private:
-	fwArray<SDelay,_MAX_DELAYS> m_delays;
+	n0Array<SDelay,_MAX_DELAYS> m_delays;
 
 public:
-	fwDelayTimer()
+	n0DelayTimer()
 	{
 		memzero(&m_delays, sizeof(SDelay) * _MAX_DELAYS );
 		for(u32 i = 0 ; i < _MAX_DELAYS ; i++)
@@ -27,7 +31,7 @@ public:
 			m_delays[i].expired = kTrue;
 		}
 	};
-	virtual ~fwDelayTimer() {};
+	virtual ~n0DelayTimer() {};
 
 	void Update(u32 delta)
 	{
@@ -57,7 +61,7 @@ public:
 	}
 
 	template <class T>
-	ErrorCode AddDelay(u32 ms, T* pObj, bool (T::*cbFunc)(Event*), u32 delayID = 0, void *pUserData = NULL)
+	ErrorCode AddDelay(u32 ms, T* pObj, bool (T::*cbFunc)(n0Event*), u32 delayID = 0, void *pUserData = NULL)
 	{
 		if(!delayID)
 			delayID = (u32)pObj;
@@ -137,6 +141,9 @@ public:
 		}
 		return ret;
 	}
+
+};
+
 
 };
 

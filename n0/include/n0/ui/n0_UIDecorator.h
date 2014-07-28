@@ -1,24 +1,26 @@
-#ifndef __FWUIDECORATOR_H__
-#define __FWUIDECORATOR_H__
+#ifndef __UIDECORATOR_H__
+#define __UIDECORATOR_H__
+namespace n0
+{
 
-class fwUIDecorator : public fwUIObject
+class UIDecorator : public UIObject
 {
 
 protected:
-	fwUIDecorator * m_decorator;
-	fwUIDecorator(fwUIDecorator *decorator, u32 id) : fwUIObject(id) { m_decorator = decorator; }
-	virtual ~fwUIDecorator() { }
+	UIDecorator * m_decorator;
+	UIDecorator(UIDecorator *decorator, u32 id) : UIObject(id) { m_decorator = decorator; }
+	virtual ~UIDecorator() { }
 public:
 	
-	virtual void Draw() { fwUIObject::Draw(); }
-	virtual void Update(u32 delta)  { fwUIObject::Update(delta);}
-	virtual bool OnEvent(Event *e) { return fwUIObject::OnEvent(e); }
+	virtual void Draw() { UIObject::Draw(); }
+	virtual void Update(u32 delta)  { UIObject::Update(delta);}
+	virtual bool OnEvent(n0Event *e) { return UIObject::OnEvent(e); }
 	 
-	void AddChild(fwUIObject * child) { fwUIObject::AddChild(child); }
-	void RemoveChild(fwUIObject * child) { fwUIObject::RemoveChild(child); }
-	void RemoveChild(u32 childID) { fwUIObject::RemoveChild(childID); }
+	void AddChild(UIObject * child) { UIObject::AddChild(child); }
+	void RemoveChild(UIObject * child) { UIObject::RemoveChild(child); }
+	void RemoveChild(u32 childID) { UIObject::RemoveChild(childID); }
 
 };
 
-
+};
 #endif

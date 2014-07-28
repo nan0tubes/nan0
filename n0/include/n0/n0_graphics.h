@@ -5,7 +5,14 @@
 
 
 
+namespace n0
+{
+
+
 bool InitGraphics(int &width, int &height, int &bitdepth);
+
+
+};
 
 
 

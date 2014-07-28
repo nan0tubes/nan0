@@ -61,15 +61,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="..\..\..\include\n0\IDrawable.h" />
+    <ClInclude Include="..\..\..\include\n0\IEventHandler.h" />
+    <ClInclude Include="..\..\..\include\n0\IEventListener.h" />
+    <ClInclude Include="..\..\..\include\n0\IUpdateable.h" />
     <ClInclude Include="..\..\..\include\n0\n0.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Array.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Class.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Defines.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_DelayTimer.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Events.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_File.h" />
     <ClInclude Include="..\..\..\include\n0\n0_graphics.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Mutex.h" />
     <ClInclude Include="..\..\..\include\n0\n0_platform.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_scene.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_StaticBuffer.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_types.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_android.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_iphone.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_windows.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_ui.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIButton.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIDecorator.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIManager.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIMouseOver.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIObject.h" />
+    <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
+    <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
+    <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
+    <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
+    <ClCompile Include="..\..\..\src\UI\fwUIButton.cpp" />
+    <ClCompile Include="..\..\..\src\UI\fwUIManager.cpp" />
+    <ClCompile Include="..\..\..\src\UI\fwUIObject.cpp" />
+    <ClCompile Include="..\..\..\src\UI\fwUIWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,21 +1,25 @@
 #ifndef __EVENTS_H__
 #define __EVENTS_H__
 
-struct Event 
+
+namespace n0
+{
+
+struct n0Event 
 {
 	void *pData;
 	u32 m_type;
 
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %p", m_type, pData); }
-	Event(u32 type, void *data = 0) : pData(data),m_type(type) {} ;
-	enum EEventType{ Event_NoEvent = 0, Event_DefaultEvent, Event_DelayCallback};
+	n0Event(u32 type, void *data = 0) : pData(data),m_type(type) {} ;
+	enum EEventType{ n0Event_NoEvent = 0, n0Event_DefaultEvent, n0Event_DelayCallback};
 };
 
 class CallbackSpecBase
 {
 public:
 	virtual ~CallbackSpecBase() {}
-	virtual bool operator()(Event*) const = 0;
+	virtual bool operator()(n0Event*) const = 0;
 };
 
 template<class C, class T>
@@ -23,7 +27,7 @@ class CallbackSpec : public CallbackSpecBase
 {
 public:
 	CallbackSpec(C& o, T m) : obj(o), method(m) {}
-	bool operator()(Event* evt) const { return (&obj->*method)(evt); } // how to pass "..." into method(...)
+	bool operator()(n0Event* evt) const { return (&obj->*method)(evt); } // how to pass "..." into method(...)
 
 private:
 	C& obj;
@@ -42,7 +46,7 @@ public:
 
 	template<class C, class T>
 	void set(C& o, T m) { spec.reset(new CallbackSpec<C, T>(o, m)); }
-	bool call(Event *evt) { return (*spec)(evt); }
+	bool call(n0Event *evt) { return (*spec)(evt); }
 
 private:
 	std::auto_ptr<CallbackSpecBase> spec;
@@ -50,19 +54,19 @@ private:
 
 
 //KeyEvent is just an example of the event design, key events are actually processed by irrlicht in most cases
-struct KeyEvent : public Event
+struct KeyEvent : public n0Event
 {
 	u32 m_keyCode;
 
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, Key %u, pData: %p", m_type, m_keyCode, pData); }
-	KeyEvent(u32 type, u32 keyCode, void *data =0 ) : Event(type,data), m_keyCode(keyCode) {}
+	KeyEvent(u32 type, u32 keyCode, void *data =0 ) : n0Event(type,data), m_keyCode(keyCode) {}
 	enum EKeyEvent{ kEvent_KeyDown = 100,kEvent_KeyUp, kEvent_KeyRepeat, kEvent_KeyCount};
 };
 
-struct SInputEvent : public Event
+struct SInputEvent : public n0Event
 {
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %p", m_type, pData); }
-	SInputEvent(u32 type, void *data = 0) : Event(type, data) { }
+	SInputEvent(u32 type, void *data = 0) : n0Event(type, data) { }
 	enum EInputEventType {
 		kEvent_Input_First = 200,
 		kEvent_InputLeft_Down = kEvent_Input_First, kEvent_InputLeft_Up,
@@ -82,11 +86,11 @@ struct SInputEvent : public Event
 	};
 };
 
-struct SSceneEvent : public Event
+struct SSceneEvent : public n0Event
 {
 	u32 sceneID;
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, pData: %p", m_type, sceneID, pData); }
-	SSceneEvent(u32 type, u32 id, void *data = 0):Event(type,data),sceneID(id) {}
+	SSceneEvent(u32 type, u32 id, void *data = 0):n0Event(type,data),sceneID(id) {}
 	enum ESceneEvent
 	{
 		kEvent_SceneCreated = 300,
@@ -101,11 +105,11 @@ struct SSceneEvent : public Event
 	};
 };
 
-struct SGUIEvent : Event
+struct SGUIEvent : n0Event
 {
 	u32 sceneID;
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, pData: %p", m_type, sceneID, pData); }
-	SGUIEvent(u32 type, u32 id, void *data = 0) : Event(type, data),sceneID(id) { }
+	SGUIEvent(u32 type, u32 id, void *data = 0) : n0Event(type, data),sceneID(id) { }
 	enum EGUIEventType {
 		kEvent_GUI_First = 400,
 		kEvent_GUI_ButtonClicked = kEvent_GUI_First,
@@ -114,12 +118,12 @@ struct SGUIEvent : Event
 	};
 };
 
-struct SAchievementEvent : Event
+struct SAchievementEvent : n0Event
 {
 	u32 m_id;
 	u32 m_value;
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, Val: %u,  pData: %p", m_type, m_id, m_value, pData); }
-	SAchievementEvent(u32 type, u32 id, u32 val, void *data = 0) : Event(type, data), m_id(id), m_value(val) { }
+	SAchievementEvent(u32 type, u32 id, u32 val, void *data = 0) : n0Event(type, data), m_id(id), m_value(val) { }
 	enum EAchievementType {
 		kEvent_Achievement_GameNotification = 500,
 		kEvent_Achievement_AchievementProgress,
@@ -127,6 +131,9 @@ struct SAchievementEvent : Event
 
 		kEvent_AchievementType_Count
 	};
+};
+
+
 };
 
 #endif //__EVENTS_H__

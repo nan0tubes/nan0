@@ -30,6 +30,7 @@ typedef struct _vec2f {
 	f32 X;
 	f32 Y;
 	
+	_vec2f() { X = 0; Y = 0; }
 	_vec2f(f32 x,f32 y):X(x),Y(y) {}
 	_vec2f operator +(_vec2f &b) { X += b.X; Y += b.Y; return *this; }
 
@@ -38,7 +39,7 @@ typedef struct _vec2f {
 typedef struct _vec2i {
 	s32 X;
 	s32 Y;
-	
+	_vec2i() { X = 0; Y = 0; }
 	_vec2i(s32 x,s32 y):X(x),Y(y) {}
 	_vec2i operator +(_vec2i &b) { X += b.X; Y += b.Y; return *this; }
 } vec2i;
@@ -48,6 +49,7 @@ typedef struct _vec3f {
 	f32 Y;
 	f32 Z;
 
+	_vec3f() { X = 0; Y = 0; Z = 0;}
 	_vec3f(f32 x,f32 y,f32 z):X(x),Y(y),Z(z) {}
 	_vec3f operator +(_vec3f &b) { X += b.X; Y += b.Y; Z += b.Z; return *this; }
 } vec3f;
@@ -57,7 +59,8 @@ typedef struct _vec3i {
 	s32 Y;
 	s32 Z;
 
-
+	
+	_vec3i() { X = 0; Y = 0; Z = 0;}
 	_vec3i(s32 x,s32 y,s32 z):X(x),Y(y),Z(z) {}
 	_vec3i operator +(_vec3i &b) { X += b.X; Y += b.Y; Z += b.Z; return *this; }
 } vec3i;

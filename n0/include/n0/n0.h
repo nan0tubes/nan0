@@ -23,8 +23,6 @@
 #include "IDrawable.h"
 #include "IEventHandler.h"
 
-//#include "n0_AchievementManager.h"
-//
 
 #include "n0_DelayTimer.h"
 #include "n0_File.h"
@@ -32,8 +30,6 @@
 #include "n0_Mutex.h"
 #include "n0_StaticBuffer.h"
 
-#include "n0_sprite.h"
-#include "n0_AnimatedSprite.h"
 
 
 

@@ -1,7 +1,10 @@
-#ifndef __FWUIOBJECT_H__
-#define __FWUIOBJECT_H__
+#ifndef __UIOBJECT_H__
+#define __UIOBJECT_H__
 
-class fwUIObject : public IDrawable, public IUpdateable, public IEventListener, public IEventHandler<8>
+namespace n0
+{
+
+class UIObject : public IDrawable, public IUpdateable, public IEventListener, public IEventHandler<8>
 {
 	static const u32 kMaxNumChildren = 32;
 
@@ -19,27 +22,27 @@ protected:
 	u32 m_UID;
 
 	u32 m_numChildren;
-	fwArray<fwUIObject*,kMaxNumChildren> m_children;
+	n0Array<UIObject*,kMaxNumChildren> m_children;
 
 public:
-	fwUIObject();
-	fwUIObject(u32 id);
-	virtual ~fwUIObject();
+	UIObject();
+	UIObject(u32 id);
+	virtual ~UIObject();
 
 	inline u32 GetID() { return  m_UID; }
 
 	virtual void Draw();
 	virtual void Update(u32 delta);
-	virtual bool OnEvent(Event *);
+	virtual bool OnEvent(n0Event *);
 
 	inline virtual bool IsHidden() { return m_visible; }
 	inline virtual void Hide() { m_visible = kFalse; }
 	inline virtual void Show() { m_visible = kTrue; }
-	inline virtual bool operator<(const fwUIObject &b) { return m_depth < b.m_depth; }
+	inline virtual bool operator<(const UIObject &b) { return m_depth < b.m_depth; }
 
-	bool AddChild(fwUIObject * child) ;
-	fwUIObject * RemoveChild(fwUIObject * child);
-	fwUIObject * RemoveChild(u32 childID);
+	bool AddChild(UIObject * child) ;
+	UIObject * RemoveChild(UIObject * child);
+	UIObject * RemoveChild(u32 childID);
 
 	inline void SetDepth(s32 depth) { m_depth = depth; }
 	inline void SetParentPosition(s32 x, s32 y) { m_parentPos.X = x;  m_parentPos.Y = y; }
@@ -54,6 +57,8 @@ public:
 	inline const vec2i GetPosition() { return m_postion; }
 	inline const vec2i GetWorldPostion() { return (m_parentPos + m_postion); }
 
-}; // fwUIObject
+}; // UIObject
+
+};
 
 #endif

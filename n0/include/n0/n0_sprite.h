@@ -2,6 +2,10 @@
 #define __SPRITE_H__
 
 
+
+namespace n0
+{
+
 //Sprites are 2D in Nature
 
 class Sprite 
@@ -72,4 +76,7 @@ public:
 //	irr::core::vector2di GetDims(const char * filename);
 };
 
+
+
+};
 #endif //__SPRITE_H__

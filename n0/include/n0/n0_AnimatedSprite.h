@@ -4,6 +4,10 @@
 #ifndef ANIMATED_SPRITE_H
 #define ANIMATED_SPRITE_H
 
+
+namespace n0
+{
+
 class AnimatedSprite : public Sprite, public IUpdateable
 {
 public:
@@ -73,4 +77,7 @@ public:
 //	inline void Show() { if(m_pSceneNode) m_pSceneNode->setVisible(kTrue); }
 };
 
+
+
+};
 #endif

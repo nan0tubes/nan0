@@ -1,21 +1,25 @@
 #ifndef __FW_ARRAY_H__
 #define __FW_ARRAY_H__
 
+
+namespace n0
+{
+
 template<class T, u32 SIZE>
-class fwArray 
+class n0Array 
 {
 public:
 
 	T data[SIZE];
 	
-	fwArray() 
+	n0Array() 
 	{ 
 		memzero(&data, sizeof(T)*SIZE); 
 	}
 
 	inline T& operator[] (u32 index)
 	{
-		FW_ASSERT((index < SIZE),"Array index out of Bounds!");
+		n0_ASSERT((index < SIZE),"Array index out of Bounds!");
 		return data[index];
 	}
 
@@ -45,4 +49,7 @@ static ErrorCode removeAt(std::array<T, SIZE> &arr, u32 index, u32 topIndex = SI
 	}
 	return kErrorCode_Success;
 }
+
+
+};
 #endif // __FW_ARRAY_H__

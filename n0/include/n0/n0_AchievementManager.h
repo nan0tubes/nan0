@@ -2,6 +2,10 @@
 #define __ACHIEVEMENTMANAGER_H__
 
 
+namespace n0
+{
+
+
 class AchievementObjective
 {
 private:
@@ -71,4 +75,7 @@ private:
 	std::vector<Achievement*> m_achievements;
 };
 
+
+
+};
 #endif // __ACHIEVEMENTMANAGER_H__

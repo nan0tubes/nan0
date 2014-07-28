@@ -2,6 +2,10 @@
 #define __IEVENTHANDLER_H__
 
 
+
+namespace n0
+{
+
 template <u32 MAX_LISTENERS> class IEventHandler
 {
 	struct Listener
@@ -14,14 +18,14 @@ template <u32 MAX_LISTENERS> class IEventHandler
 private:
 	u32 m_numListeners;
 	std::array<Listener,MAX_LISTENERS> m_listeners;
-	std::queue<Event*> m_eventQueue;
+	std::queue<n0Event*> m_eventQueue;
 
 public:
 
 	IEventHandler() { m_numListeners = 0;}
 
 	template <class T>
-	ErrorCode RegisterEventListener(u32 eventType, T* pObj, bool (T::*cbFunc)(Event*), u32 listenerID = 0)
+	ErrorCode RegisterEventListener(u32 eventType, T* pObj, bool (T::*cbFunc)(n0Event*), u32 listenerID = 0)
 	{
 		if(m_numListeners == MAX_LISTENERS )
 			return kErrorCode_OutOfSpace;
@@ -37,7 +41,7 @@ public:
 	}
 
 	template <class T>
-	ErrorCode DeRegisterEventListener(u32 eventType, T* pObj, bool (T::*cbFunc)(Event*), u32 listenerID = 0)
+	ErrorCode DeRegisterEventListener(u32 eventType, T* pObj, bool (T::*cbFunc)(n0Event*), u32 listenerID = 0)
 	{
 		ErrorCode returnCode = kErrorCode_NotFound;
 		if(!listenerID)
@@ -59,7 +63,7 @@ public:
 		return returnCode;
 	}
 
-	bool FireEvent(Event *e)
+	bool FireEvent(n0Event *e)
 	{
 		bool eventHandled = false;
 // 		char log[kStrLen_Medium];
@@ -78,11 +82,11 @@ public:
 		return eventHandled;
 	}
 
-	template <class EventClass>
-	void QueueEvent(EventClass *e)
+	template <class n0EventClass>
+	void QueueEvent(n0EventClass *e)
 	{
-		EventClass *evt = new EventClass(*e);
-		std::memcpy(evt,e,sizeof(EventClass));
+		n0EventClass *evt = new n0EventClass(*e);
+		std::memcpy(evt,e,sizeof(n0EventClass));
 		m_eventQueue.push(evt);
 	}
 
@@ -91,12 +95,15 @@ public:
 		
 		while(!m_eventQueue.empty())
 		{
-			Event *evt = m_eventQueue.front();
+			n0Event *evt = m_eventQueue.front();
 			FireEvent(evt);
 			SAFE_DELETE(evt);
 			m_eventQueue.pop();
 		}
 	}
+
+};
+
 
 };
 
