@@ -35,6 +35,10 @@ namespace n0
 		static EGLContext			eglContext = NULL;
 
 		
+		void SetHInstance(HINSTANCE appInstance)
+		{
+			g_appInstance = appInstance;
+		}
 
 		LRESULT CALLBACK HandleWindowMessages(HWND nativeWindow, UINT message, WPARAM windowParameters, LPARAM longWindowParameters)
 		{
