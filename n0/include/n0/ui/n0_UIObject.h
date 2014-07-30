@@ -45,13 +45,13 @@ public:
 	UIObject * RemoveChild(u32 childID);
 
 	inline void SetDepth(s32 depth) { m_depth = depth; }
-	inline void SetParentPosition(s32 x, s32 y) { m_parentPos.X = x;  m_parentPos.Y = y; }
+	inline void SetParentPosition(s32 x, s32 y) { m_parentPos.x = x;  m_parentPos.y = y; }
 	inline void SetParentPosition(vec2i pos) { m_parentPos = pos; }
 
-	inline void SetPosition(s32 x, s32 y) { m_postion.X = x; m_postion.Y = y; }
+	inline void SetPosition(s32 x, s32 y) { m_postion.x = x; m_postion.y = y; }
 	inline void SetPosition(vec2i pos) { m_postion = pos; }
 
-	inline void SetAnchor(s32 x, s32 y) { m_anchor.X = x, m_anchor.Y = y; }
+	inline void SetAnchor(s32 x, s32 y) { m_anchor.x = x, m_anchor.y = y; }
 	inline void SetAnchor(vec2i pos) { m_anchor = pos; }
 
 	inline const vec2i GetPosition() { return m_postion; }

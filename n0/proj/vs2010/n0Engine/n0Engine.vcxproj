@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
     <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
+    <ClCompile Include="..\..\..\src\n0_Types.cpp" />
     <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
     <ClCompile Include="..\..\..\src\UI\fwUIButton.cpp" />
     <ClCompile Include="..\..\..\src\UI\fwUIManager.cpp" />

@@ -13,6 +13,7 @@
 #include <array>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #if  defined(_WIN32)
 #include "platform/n0_windows.h"

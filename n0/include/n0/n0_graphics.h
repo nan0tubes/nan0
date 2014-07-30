@@ -13,7 +13,4 @@ bool InitGraphics(int &width, int &height, int &bitdepth);
 
 
 };
-
-
-
 #endif

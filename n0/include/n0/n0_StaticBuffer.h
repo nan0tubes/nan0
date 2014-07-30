@@ -13,7 +13,7 @@ static const u32 kMaxStaticBufferSections = 32;
 struct n0BufferSection
 {
 	void *pStaticBuffer;
-	btye *pData;
+	byte *pData;
 	u32 size;
 	u32 offset;
 	u32 name;
@@ -21,7 +21,7 @@ struct n0BufferSection
 struct n0StaticBuffer
 {
 	n0BufferSection sections[kMaxStaticBufferSections];
-	btye *pData;
+	byte *pData;
 	u32 maxSize;
 	
 	u32 leftPos;	// tracker of byte of free space

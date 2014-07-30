@@ -19,9 +19,9 @@
 	#if !defined(snprintf)
 		#define snprintf sprintf_s
 	#endif
-	#if !defined(strncpy)
-		#define strncpy strncpy_s
-	#endif
+//	#if !defined(strncpy)
+//		#define strncpy strncpy_s
+//	#endif
 #endif
 
 #define memzero(ptr, sz) { n0_ASSERT((ptr) != NULL, "trying to memzero NULL");  memset((ptr),0,(sz)); }

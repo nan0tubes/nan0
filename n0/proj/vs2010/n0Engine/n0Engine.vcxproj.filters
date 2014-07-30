@@ -134,5 +134,8 @@
     <ClCompile Include="..\..\..\src\platform\n0_windows.cpp">
       <Filter>Source Files\platform</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

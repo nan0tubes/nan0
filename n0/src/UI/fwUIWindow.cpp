@@ -7,12 +7,12 @@ UIWindow::UIWindow(u32 x, u32 y, u32 w, u32 h, UIDecorator *decorator, u32 id)
 	:UIDecorator(decorator,id) 
 {
 	//m_pTexture = NULL;
-	m_postion.X = x;
-	m_postion.Y = y;
+	m_postion.x = x;
+	m_postion.y = y;
 	m_width = w;
 	m_height = h;
-	m_anchor.X = w >> 1;
-	m_anchor.Y = h >> 1;
+	m_anchor.x = w >> 1;
+	m_anchor.y = h >> 1;
 
 }
 UIWindow::~UIWindow()

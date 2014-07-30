@@ -10,9 +10,11 @@
 #pragma once
 
 //
-#include "n0_platform.h"
+
 #include "n0_types.h"
 #include "n0_Defines.h"
+#include "n0_platform.h"
+
 
 #include "n0_Array.h"
 #include "n0_Class.h"
