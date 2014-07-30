@@ -3,7 +3,7 @@
 namespace n0
 {
 	template<class T>
-	bool Vec2<T>::IsBetweenPoints(const Vec2<T> & begin, const Vec2<T> & end) const
+	bool vec2<T>::IsBetweenPoints(const vec2<T> & begin, const vec2<T> & end) const
 	{
 		if (begin.GetX() != end.GetX())
 			return ((begin.GetX() <= this->x && this->x <= end.GetX()) || (begin.GetX >= this->x && this->x >= end.GetX()));
