@@ -60,7 +60,7 @@ void n0_RefManager::Purge()
 #ifdef _DEBUG
 	m_oldObjects.insert(m_oldObjects.end(),m_objects.begin(),m_objects.end());
 #else
-	vector<n0_RefCounted*>::iterator it = m_objects.begin();
+	std::vector<n0_RefCounted*>::iterator it = m_objects.begin();
 	for(;it !=m_objects.end(); it++)
 	{
 		delete (*it);

@@ -742,8 +742,8 @@ void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour)
 
 void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2)
 {
-	vertexData[0].pos.SetX(x1); vertexData[0].pos.SetY(y1); vertexData[0].c.Set(colour1);
-	vertexData[1].pos.SetX(x2); vertexData[1].pos.SetY(y2); vertexData[1].c.Set(colour2);
+	vertexData[0].pos.x = x1; vertexData[0].pos.y = y1; vertexData[0].c.Set(colour1);
+	vertexData[1].pos.x = x2; vertexData[1].pos.y = y2; vertexData[1].c.Set(colour2);
 
 	glUseProgram(shaderProgram);
 
@@ -779,13 +779,13 @@ void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f co
 	memset(vertexData,0,sizeof(Vertex)*MAX_VERTEX);
 
 	//botleft
-	vertexData[0].pos.SetX(x); vertexData[0].pos.SetY(y); vertexData[0].c.Set(colourSW);
-	vertexData[1].pos.SetX(x); vertexData[1].pos.SetY(y+h); vertexData[1].c.Set(colourNW);
-	vertexData[2].pos.SetX(x+w); vertexData[2].pos.SetY(y+h); vertexData[2].c.Set(colourNE);
+	vertexData[0].pos.x = x; vertexData[0].pos.y = y; vertexData[0].c.Set(colourSW);
+	vertexData[1].pos.x = x; vertexData[1].pos.y = y + h; vertexData[1].c.Set(colourNW);
+	vertexData[2].pos.x = x + w; vertexData[2].pos.y = y + h; vertexData[2].c.Set(colourNE);
 	//TopRight
-	vertexData[3].pos.SetX(x); vertexData[3].pos.SetY(y); vertexData[3].c.Set(colourSW);
-	vertexData[4].pos.SetX(x+w); vertexData[4].pos.SetY(y); vertexData[4].c.Set(colourSE);
-	vertexData[5].pos.SetX(x+w); vertexData[5].pos.SetY(y+h); vertexData[5].c.Set(colourNE);
+	vertexData[3].pos.x = x; vertexData[3].pos.y = y; vertexData[3].c.Set(colourSW);
+	vertexData[4].pos.x = x + w; vertexData[4].pos.y = y; vertexData[4].c.Set(colourSE);
+	vertexData[5].pos.x = x + w; vertexData[5].pos.y = y + h; vertexData[5].c.Set(colourNE);
 
 
 

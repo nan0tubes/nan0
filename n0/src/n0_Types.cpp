@@ -2,15 +2,6 @@
 
 namespace n0
 {
-	template<class T>
-	bool Vec2<T>::IsBetweenPoints(const Vec2<T> & begin, const Vec2<T> & end) const
-	{
-		if (begin.GetX() != end.GetX())
-			return ((begin.GetX() <= this->x && this->x <= end.GetX()) || (begin.GetX >= this->x && this->x >= end.GetX()));
-		else
-			return ((begin.GetY() <= this->y && this->y <= end.GetY()) || (begin.GetY() >= this->y && this->y >= end.GetY()));
-	}
-
 	Colour Colour::operator+(const Colour& other) const
 	{	
 		return Colour(min(GetRed() + other.GetRed(), 255),

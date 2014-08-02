@@ -30,6 +30,24 @@
 #define kTrue 1
 #define kFalse 0
 
+#define PI			3.14159265359f
+#define PI_HALF		PI / 2.0f
+#define PIE_TWO		PI * 2.0f
+#define DEGTORAD	PI / 180.0f
+#define RADTODEG	180.0f / PI
+
+inline f32 RadToDeg(f32 rad) { return RADTODEG * rad; }
+inline f32 DegToRad(f32 deg) { return DEGTORAD * deg; }
+
+#define PI64		3.1415926535897932384626433832795028841971693993751
+#define PI64_HALF	PI64 / 2.0
+#define PI64_TWO	PI64 * 2.0
+#define DEGTORAD64	PI64 / 180.0
+#define RADTODEG64	180.0 / PI64
+
+inline f64 RadToDeg(f64 rad) { return RADTODEG64 * rad; }
+inline f64 DegToRad(f64 deg) { return DEGTORAD64 * deg; }
+
 // common string lengths
 #define kStrLen_Fine		   8
 #define kStrLen_Diminutive	  16

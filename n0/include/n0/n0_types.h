@@ -20,9 +20,6 @@
 	typedef unsigned int u32;
 #endif
 
-namespace n0
-{
-
 	typedef unsigned char byte;
 
 #if defined(_MSC_VER) || ((__BORLANDC__ >= 0x530) && !defined(__STRICT_ANSI__))
@@ -30,11 +27,11 @@ namespace n0
 	typedef unsigned __int64 u64;
 #elif __GNUC__
 #	if __WORDSIZE == 64
-		typedef long int s64;
-		typedef unsigned long int u64;
+	typedef long int s64;
+	typedef unsigned long int u64;
 #	else
-		__extension__ typedef long long s64;
-		__extension__ typedef unsigned long long u64;
+	__extension__ typedef long long s64;
+	__extension__ typedef unsigned long long u64;
 #	endif
 #else
 	typedef long long s64;
@@ -44,55 +41,98 @@ namespace n0
 	typedef float f32;
 	typedef double f64;
 
+namespace n0
+{
 	//VEC2
 	template<class T>
-	class Vec2
+	class vec2
 	{
 	public:
 		T x;
 		T y;
 
 	public:
-		Vec2<T>() : x(0), y(0) { }
-		Vec2<T>(const T & value) : x(value), y(value) { }
-		Vec2<T>(const T & x, const T & y) : x(x), y(y) { }
-		Vec2<T>(const Vec2<T> & other) : x(other.x), y(other.y) { }
+		vec2<T>() : x(0), y(0) { }
+		vec2<T>(const T & value) : x(value), y(value) { }
+		vec2<T>(const T & x, const T & y) : x(x), y(y) { }
+		vec2<T>(const vec2<T> & other) : x(other.x), y(other.y) { }
 
-		bool Equals(const Vec2<T> & other) const { return this->x == other.x && this->y == other.y; }
-		bool IsBetweenPoints(const Vec2<T> & begin, const Vec2<T> & end) const;
+		bool Equals(const vec2<T> & other) const { return x == other.x && y == other.y; }
+		bool IsBetweenPoints(const vec2<T> & begin, const vec2<T> & end) const { return (begin.x != end.x) ? ((begin.x <= x && x <= end.x) || (begin.x >= x && x >= end.x)) : ((begin.y <= y && y << end.y) || (begin.y >= y && y >= end.y)); }
+		T GetLength() const { return sqrt(x * x + y * y); }
+		T GetLengthSquared() const { return x * x + y * y; }
+		T DotProduct(const vec2<T> & other) const { return x * other.x + y * other.y; }
+		T GetDistanceFrom(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLength(); }
+		T GetDistanceFromSquared(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLengthSquared(); }
+		vec2<T> GetInterpolated(const vec2<T> & other, f64 d) const { const inv = 1.0 - d; return vec2<T>((T)(other.x * onv + x * d), (T)(other.y * inv + y * d)); }
+		vec2<T> & Interpolate(const vec2<T> & a, const vec2<T> & b, f32 d) { x = (T)((f64)b.x + ((a.x - b.x) * d)); y = (T)((f64)b.y + ((a.y - b.y) * d)); return *this; }
+		vec2<T> & RotateByDeg(f64 degrees, const vec2<T> & center = vec2<T>())
+		{
+			degrees *= DEGTORAD64;
+			const f64 cs = cos(degrees);
+			const f64 sn = sin(degrees);
+			x -= center.x;
+			y -= center.y;
+			return *this;
+		}
+		vec2<T> & Normalize()
+		{
+			f32 length = (f32)(x * x + y * y);
+			if (length == 0)
+				return *this;
+			length = 1 / sqrt(length);
+			x = (T)(x * length);
+			y = (T)(y * length);
+			return *this;
+		}
 
-		Vec2<T> & operator=(const Vec2<T> & rhs) { this->x = rhs.x; this->y = rhs.y; return *this; }
-		Vec2<T> & operator+=(const Vec2<T> & rhs) { this->x += rhs.x; this->y += rhs.y; return *this; }
-		Vec2<T> & operator-=(const Vec2<T> & rhs) { this->x -= rhs.x; this->y -= rhs.y; return *this; }
+		bool operator==(const vec2<T> & other) const { return Equals(other); }
+		bool operator!=(const vec2<T> & other) const { return !Equals(other); }
 
-		T GetX() const { return this->x; }
-		void SetX(const T x) { this->x = x; }
+		vec2<T> & operator=(const vec2<T> & other) { x = other.x; y = other.y; return *this; }
 
-		T GetY() const { return this->y; }
-		void SetY(const T y) { this->y = y; }
+		vec2<T> operator-() const { return vec2<T>(-x, -y); }
+		vec2<T> & operator-=(const vec2<T> & other) { x -= other.x; y -= other.y; return *this; }
+		vec2<T> operator-(const T n) const { return vec2<T>(x - n, y - n); }
+		vec2<T> & operator-=(const T n) { x -= n; y -= n; return *this; }
+
+		vec2<T> operator+(vec2<T> & other) const { return vec2<T>(x + other.x, y + other.y); }
+		vec2<T> & operator+=(const vec2<T> & other) { x += other.x; y += other.y; return *this; }
+		vec2<T> operator+(const T n) const { return vec2<T>(x + n, y + n); }
+		vec2<T> & operator+=(const T n) { x += n; y += n; return *this; }
+
+		vec2<T> operator*(vec2<T> & other) const { return vec2<T>(x * other.x, y * other.y); }
+		vec2<T> & operator*=(const vec2<T> & other) { x *= other.x; y *= other.y; return *this; }
+		vec2<T> operator*(const T n) const { return vec2<T>(x * n, y * n); }
+		vec2<T> & operator*=(const T n) { x *= n; y *= n; return *this; }
+
+		vec2<T> operator/(vec2<T> & other) const { return vec2<T>(x / other.x, y / other.y); }
+		vec2<T> & operator/=(const vec2<T> & other) { x /= other.x; y /= other.y; return *this; }
+		vec2<T> operator/(const T n) const { return vec2<T>(x / n, y / n); }
+		vec2<T> & operator/=(const T n) { x /= n; y /= n; return *this; }
 	};
 
 	template<class T>
-	static Vec2<T> operator+(Vec2<T> lhs, const Vec2<T> & rhs) { lhs += rhs; return lhs; }
+	static vec2<T> operator+(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x + rhs.x, lhs.y + rhs.y); }
+ 	template<class T>
+	static vec2<T> operator-(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x - rhs.x, lhs.y - rhs.y); }
 	template<class T>
-	static Vec2<T> operator-(Vec2<T> lhs, const Vec2<T> & rhs) { lhs -= rhs; return lhs; }
+ 	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x * rhs.x, lhs.y * rhs.y); }
+ 	template<class T>
+ 	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x / rhs.x, lhs.y / rhs.y); }
+ 
 	template<class T>
-	static Vec2<T> operator*(Vec2<T> lhs, const T & rhs) { lhs.x *= rhs; lhs.y *= rhs; return lhs; }
+	static bool operator==(const vec2<T> & lhs, const vec2<T> & rhs) { return lhs.Equals(rhs); }
 	template<class T>
-	static Vec2<T> operator/(Vec2<T> lhs, const T & rhs) { lhs.x /= rhs; lhs.y /= rhs; return lhs; }
+	static bool operator!=(const vec2<T> & lhs, const vec2<T> & rhs) { return !lhs.Equals(rhs); }
 
-	template<class T>
-	static bool operator==(const Vec2<T> & lhs, const Vec2<T> & rhs) { return lhs.Equals(rhs); }
-	template<class T>
-	static bool operator!=(const Vec2<T> & lhs, const Vec2<T> & rhs) { return !operator==(lhs, rhs); }
-
-	typedef Vec2<s32> vec2i;
-	typedef Vec2<u32> vec2u;
-	typedef Vec2<f32> vec2f;
+	typedef vec2<s32> vec2i;
+	typedef vec2<u32> vec2u;
+	typedef vec2<f32> vec2f;
 
 	// VEC3
 	template<class T>
-	class Vec3
+	class vec3
 	{
 	public:
 		T x;
@@ -100,91 +140,82 @@ namespace n0
 		T z;
 
 	public:
-		Vec3<T>() : x(0), y(0), z(0) { }
-		Vec3<T>(const T & value) : x(value), y(value), z(value) { }
-		Vec3<T>(const T & x, const T & y, const T & z) : x(x), y(y), z(z) { }
-		Vec3<T>(const Vec3<T> & other) : x(other.x), y(other.y), z(other.z) { }
+		vec3<T>() : x(0), y(0), z(0) { }
+		vec3<T>(const T & value) : x(value), y(value), z(value) { }
+		vec3<T>(const T & x, const T & y, const T & z) : x(x), y(y), z(z) { }
+		vec3<T>(const vec3<T> & other) : x(other.x), y(other.y), z(other.z) { }
 
-		bool Equals(const Vec3<T> & other) const { return this->x == other.x && this->y == other.y && this->z == other.z; }
-//		bool IsBetweenPoints(const Vec3<T> & begin, const Vec3<T> & end) const;
+		bool Equals(const vec3<T> & other) const { return x == other.x && y == other.y && z == other.z; }
+//		bool IsBetweenPoints(const vec3<T> & begin, const vec3<T> & end) const;
 
-		Vec3<T> & operator=(const Vec3<T> & rhs) { this->x = rhs.x; this->y = rhs.y; this->z = rhs.z; return *this; }
-		Vec3<T> & operator+=(const Vec3<T> & rhs) { this->x += rhs.x; this->y += rhs.y; this->z += rhs.z; return *this; }
-		Vec3<T> & operator-=(const Vec3<T> & rhs) { this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z; return *this; }
-
-		T GetX() const { return this->x; }
-		void SetX(const T x) { this->x = x; }
-
-		T GetY() const { return this->y; }
-		void SetY(const T y) { this->y = y; }
-
-		T GetZ() const { return this->z; }
-		void SetZ(const T z) { this->z = z; }
+		vec3<T> & operator=(const vec3<T> & rhs) { x = rhs.x; y = rhs.y; z = rhs.z; return *this; }
+		vec3<T> & operator+=(const vec3<T> & rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
+		vec3<T> & operator-=(const vec3<T> & rhs) { x -= rhs.x; y -= rhs.y; z -= rhs.z; return *this; }
 	};
 
 	template<class T>
-	static Vec3<T> operator+(Vec3<T> lhs, const Vec3<T> & rhs) { lhs += rhs; return lhs; }
+	static vec3<T> operator+(vec3<T> lhs, const vec3<T> & rhs) { lhs += rhs; return lhs; }
 	template<class T>
-	static Vec3<T> operator-(Vec3<T> lhs, const Vec3<T> & rhs) { lhs -= rhs; return lhs; }
+	static vec3<T> operator-(vec3<T> lhs, const vec3<T> & rhs) { lhs -= rhs; return lhs; }
 	template<class T>
-	static Vec3<T> operator*(Vec3<T> lhs, const T & rhs) { lhs.x *= rhs; lhs.y *= rhs; return lhs; }
+	static vec3<T> operator*(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
 	template<class T>
-	static Vec3<T> operator/(Vec3<T> lhs, const T & rhs) { lhs.x /= rhs; lhs.y /= rhs; return lhs; }
+	static vec3<T> operator/(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x / rhs, lhs.y / rhs, lhs.z * rhs); }
 	template<class T>
-	static bool operator==(const Vec3<T> & lhs, const Vec3<T> & rhs) { return lhs.Equals(rhs); }
+	static bool operator==(const vec3<T> & lhs, const vec3<T> & rhs) { return lhs.Equals(rhs); }
 	template<class T>
-	static bool operator!=(const Vec3<T> & lhs, const Vec3<T> & rhs) { return !operator==(lhs, rhs); }
+	static bool operator!=(const vec3<T> & lhs, const vec3<T> & rhs) { return !operator==(lhs, rhs); }
 
-	typedef Vec3<s32> vec3i;
-	typedef Vec3<u32> vec3u;
-	typedef Vec3<f32> vec3f;
+	typedef vec3<s32> vec3i;
+	typedef vec3<u32> vec3u;
+	typedef vec3<f32> vec3f;
 
 	// RECT
 	template<class T>
-	class Rect
+	class rect
 	{
 	protected:
-		Vec2<T> position;
-		Vec2<T> dimensions;
+		vec2<T> position;
+		vec2<T> dimensions;
 
 	public:
-		Rect<T>() { }
-		Rect<T>(const Vec2<T> position, const Vec2<T> dimensions) : position(position), dimensions(dimensions) { }
-		Rect<T>(const Rect<T> & other) : position(other.position), dimensions(other.dimensions) { }
+		rect<T>() { }
+		rect<T>(const vec2<T> position, const vec2<T> dimensions) : position(position), dimensions(dimensions) { }
+		rect<T>(const rect<T> & other) : position(other.position), dimensions(other.dimensions) { }
 
-		Rect<T> & operator=(const Rect<T> & rhs) { this->position = rhs.position; this->dimensions= rhs.dimensions; return *this; }
+		rect<T> & operator=(const rect<T> & rhs) { position = rhs.position; dimensions= rhs.dimensions; return *this; }
 
 		// position
-		Vec2<T> GetPosition() const { return this->position; }
-		void SetPosition(const Vec2<T> & position) { this->position = position; }
-		void SetPosition(const T x, const T y) { this->position.SetX(x); this->position.SetY(y); }
+		vec2<T> GetPosition() const { return position; }
+		void SetPosition(const vec2<T> & position) { this->position = position; }
+		void SetPosition(const T x, const T y) { position.x = x; position.y = y; }
 
 		// size
-		T GetWidth() const { return this->dimensions.GetX(); }
-		void SetWidth(const T & width) { this->dimensions.SetX(width); }
-		T GetHeight() const { return this->dimensions.GetY(); }
-		void SetHeight(const T & height) { this->dimensions.SetY(height); }
-		Vec2<T> GetSize() const { return this->dimensions; }
-		void SetSize(const Vec2<T> & dimensions) { this->dimensions = dimensions; }
-		void SetSize(const T x, const T y) { this->dimensions.SetX(x); this->dimensions.SetY(y); }
+		T GetWidth() const { return dimensions.x; }
+		void SetWidth(const T & width) { dimensions.x = width; }
+		T GetHeight() const { return dimensions.y; }
+		void SetHeight(const T & height) { dimensions.y = height; }
+		vec2<T> GetSize() const { return dimensions; }
+		void SetSize(const vec2<T> & dimensions) { this->dimensions = dimensions; }
+		void SetSize(const T x, const T y) { dimensions.x = x; dimensions.y = y; }
 
 		// utility
-		Vec2<T> GetCenter() const { return Vec2<T>(this->position + this->dimensions() / 2); }
-		T GetArea() const { return this->GetWidth() * this->GetHeight(); }
-		T GetPerimeter() const { return (this->GetWidth() << 1) + (this->GetHeight() << 1); }
+		vec2<T> GetCenter() const { return dimensions / 2; }
+		T GetArea() const { return dimensions.x * dimensions.y; }
+		T GetPerimeter() const { return (dimensions.x << 1) + (dimensions.y << 1); }
 
-		bool Contains(const Vec2<T> & pt) const { return this->Contains(pt.GetX(), pt.GetY()); }
-		bool Contains(const T x, const T y) const { return !(x < this->position.GetX() || x > this->position.GetX() + this->dimensions.GetX() || y < position.GetY() || y > this->position.GetY() + dimensions.GetY()) }
+		bool Contains(const vec2<T> & pt) const { return Contains(pt.x, pt.y); }
+		bool Contains(const T x, const T y) const { return !(x < position.x || x > position.x + dimensions.x || y < position.y() || y > position.y + dimensions.y) }
 	};
 
 	template<class T>
-	static bool operator==(const Rect<T> & lhs, const Rect<T> & rhs) { return lhs.GetPosition() == rhs.GetPosition() && lhs.GetSize() == rhs.GetSize(); }
+	static bool operator==(const rect<T> & lhs, const rect<T> & rhs) { return lhs.position == rhs.position && lhs.dimensions == rhs.dimensions; }
 	template<class T>
-	static bool operator!=(const Rect<T> & lhs, const Rect<T> & rhs) { return !operator==(lhs, rhs); }
+	static bool operator!=(const rect<T> & lhs, const rect<T> & rhs) { return !operator==(lhs, rhs); }
 
-	typedef Rect<s32> Recti;
-	typedef Rect<u32> Rectu;
-	typedef Rect<f32> Rectf;
+	typedef rect<s32> recti;
+	typedef rect<u32> rectu;
+	typedef rect<f32> rectf;
 
 	// ANCHOR
 	class Anchor
