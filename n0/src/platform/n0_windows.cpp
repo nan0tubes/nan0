@@ -867,6 +867,7 @@ bool InitGraphics(int &width, int &height, int &bitdepth)
 {
 	bitdepth = 24;
 	return windows::InitSystem(windows::g_appInstance,width,height);
-	
+
 }
-};
+
+}; // n0 engine

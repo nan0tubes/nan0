@@ -108,6 +108,9 @@
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\n0_RefCounted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\n0_mutex.cpp">
@@ -135,6 +138,9 @@
       <Filter>Source Files\platform</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\n0_Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\include\n0_RefManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

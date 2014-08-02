@@ -100,8 +100,10 @@
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIMouseOver.h" />
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIObject.h" />
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h" />
+    <ClInclude Include="..\..\..\include\n0_RefCounted.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\include\n0_RefManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
     <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
