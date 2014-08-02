@@ -20,9 +20,6 @@
 	typedef unsigned int u32;
 #endif
 
-namespace n0
-{
-
 	typedef unsigned char byte;
 
 #if defined(_MSC_VER) || ((__BORLANDC__ >= 0x530) && !defined(__STRICT_ANSI__))
@@ -30,11 +27,11 @@ namespace n0
 	typedef unsigned __int64 u64;
 #elif __GNUC__
 #	if __WORDSIZE == 64
-		typedef long int s64;
-		typedef unsigned long int u64;
+	typedef long int s64;
+	typedef unsigned long int u64;
 #	else
-		__extension__ typedef long long s64;
-		__extension__ typedef unsigned long long u64;
+	__extension__ typedef long long s64;
+	__extension__ typedef unsigned long long u64;
 #	endif
 #else
 	typedef long long s64;
@@ -44,6 +41,8 @@ namespace n0
 	typedef float f32;
 	typedef double f64;
 
+namespace n0
+{
 	//VEC2
 	template<class T>
 	class vec2
@@ -59,26 +58,73 @@ namespace n0
 		vec2<T>(const vec2<T> & other) : x(other.x), y(other.y) { }
 
 		bool Equals(const vec2<T> & other) const { return x == other.x && y == other.y; }
-		bool IsBetweenPoints(const vec2<T> & begin, const vec2<T> & end) const;
+		bool IsBetweenPoints(const vec2<T> & begin, const vec2<T> & end) const { return (begin.x != end.x) ? ((begin.x <= x && x <= end.x) || (begin.x >= x && x >= end.x)) : ((begin.y <= y && y << end.y) || (begin.y >= y && y >= end.y)); }
+		T GetLength() const { return sqrt(x * x + y * y); }
+		T GetLengthSquared() const { return x * x + y * y; }
+		T DotProduct(const vec2<T> & other) const { return x * other.x + y * other.y; }
+		T GetDistanceFrom(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLength(); }
+		T GetDistanceFromSquared(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLengthSquared(); }
+		vec2<T> GetInterpolated(const vec2<T> & other, f64 d) const { const inv = 1.0 - d; return vec2<T>((T)(other.x * onv + x * d), (T)(other.y * inv + y * d)); }
+		vec2<T> & Interpolate(const vec2<T> & a, const vec2<T> & b, f32 d) { x = (T)((f64)b.x + ((a.x - b.x) * d)); y = (T)((f64)b.y + ((a.y - b.y) * d)); return *this; }
+		vec2<T> & RotateByDeg(f64 degrees, const vec2<T> & center = vec2<T>())
+		{
+			degrees *= DEGTORAD64;
+			const f64 cs = cos(degrees);
+			const f64 sn = sin(degrees);
+			x -= center.x;
+			y -= center.y;
+			return *this;
+		}
+		vec2<T> & Normalize()
+		{
+			f32 length = (f32)(x * x + y * y);
+			if (length == 0)
+				return *this;
+			length = 1 / sqrt(length);
+			x = (T)(x * length);
+			y = (T)(y * length);
+			return *this;
+		}
 
-		vec2<T> & operator=(const vec2<T> & rhs) { x = rhs.x; y = rhs.y; return *this; }
-		vec2<T> & operator+=(const vec2<T> & rhs) { x += rhs.x; y += rhs.y; return *this; }
-		vec2<T> & operator-=(const vec2<T> & rhs) { x -= rhs.x; y -= rhs.y; return *this; }
+		bool operator==(const vec2<T> & other) const { return Equals(other); }
+		bool operator!=(const vec2<T> & other) const { return !Equals(other); }
+
+		vec2<T> & operator=(const vec2<T> & other) { x = other.x; y = other.y; return *this; }
+
+		vec2<T> operator-() const { return vec2<T>(-x, -y); }
+		vec2<T> & operator-=(const vec2<T> & other) { x -= other.x; y -= other.y; return *this; }
+		vec2<T> operator-(const T n) const { return vec2<T>(x - n, y - n); }
+		vec2<T> & operator-=(const T n) { x -= n; y -= n; return *this; }
+
+		vec2<T> operator+(vec2<T> & other) const { return vec2<T>(x + other.x, y + other.y); }
+		vec2<T> & operator+=(const vec2<T> & other) { x += other.x; y += other.y; return *this; }
+		vec2<T> operator+(const T n) const { return vec2<T>(x + n, y + n); }
+		vec2<T> & operator+=(const T n) { x += n; y += n; return *this; }
+
+		vec2<T> operator*(vec2<T> & other) const { return vec2<T>(x * other.x, y * other.y); }
+		vec2<T> & operator*=(const vec2<T> & other) { x *= other.x; y *= other.y; return *this; }
+		vec2<T> operator*(const T n) const { return vec2<T>(x * n, y * n); }
+		vec2<T> & operator*=(const T n) { x *= n; y *= n; return *this; }
+
+		vec2<T> operator/(vec2<T> & other) const { return vec2<T>(x / other.x, y / other.y); }
+		vec2<T> & operator/=(const vec2<T> & other) { x /= other.x; y /= other.y; return *this; }
+		vec2<T> operator/(const T n) const { return vec2<T>(x / n, y / n); }
+		vec2<T> & operator/=(const T n) { x /= n; y /= n; return *this; }
 	};
 
 	template<class T>
-	static vec2<T> operator+(vec2<T> lhs, const vec2<T> & rhs) { lhs += rhs; return lhs; }
+	static vec2<T> operator+(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x + rhs.x, lhs.y + rhs.y); }
+ 	template<class T>
+	static vec2<T> operator-(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x - rhs.x, lhs.y - rhs.y); }
 	template<class T>
-	static vec2<T> operator-(vec2<T> lhs, const vec2<T> & rhs) { lhs -= rhs; return lhs; }
-	template<class T>
-	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x * rhs, lhs.y * rhs); }
-	template<class T>
-	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x / rhs, lhs.y / rhs); }
-
+ 	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x * rhs.x, lhs.y * rhs.y); }
+ 	template<class T>
+ 	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x / rhs.x, lhs.y / rhs.y); }
+ 
 	template<class T>
 	static bool operator==(const vec2<T> & lhs, const vec2<T> & rhs) { return lhs.Equals(rhs); }
 	template<class T>
-	static bool operator!=(const vec2<T> & lhs, const vec2<T> & rhs) { return !operator==(lhs, rhs); }
+	static bool operator!=(const vec2<T> & lhs, const vec2<T> & rhs) { return !lhs.Equals(rhs); }
 
 	typedef vec2<s32> vec2i;
 	typedef vec2<u32> vec2u;
@@ -154,9 +200,9 @@ namespace n0
 		void SetSize(const T x, const T y) { dimensions.x = x; dimensions.y = y; }
 
 		// utility
-		vec2<T> GetCenter() const { return vec2<T>(dimensions / 2); }
-		T GetArea() const { return GetWidth() * GetHeight(); }
-		T GetPerimeter() const { return (GetWidth() << 1) + (GetHeight() << 1); }
+		vec2<T> GetCenter() const { return dimensions / 2; }
+		T GetArea() const { return dimensions.x * dimensions.y; }
+		T GetPerimeter() const { return (dimensions.x << 1) + (dimensions.y << 1); }
 
 		bool Contains(const vec2<T> & pt) const { return Contains(pt.x, pt.y); }
 		bool Contains(const T x, const T y) const { return !(x < position.x || x > position.x + dimensions.x || y < position.y() || y > position.y + dimensions.y) }
