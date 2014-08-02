@@ -71,9 +71,9 @@ namespace n0
 	template<class T>
 	static vec2<T> operator-(vec2<T> lhs, const vec2<T> & rhs) { lhs -= rhs; return lhs; }
 	template<class T>
-	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { lhs.x *= rhs; lhs.y *= rhs; return lhs; }
+	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x * rhs, lhs.y * rhs); }
 	template<class T>
-	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { lhs.x /= rhs; lhs.y /= rhs; return lhs; }
+	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x / rhs, lhs.y / rhs); }
 
 	template<class T>
 	static bool operator==(const vec2<T> & lhs, const vec2<T> & rhs) { return lhs.Equals(rhs); }
@@ -112,9 +112,9 @@ namespace n0
 	template<class T>
 	static vec3<T> operator-(vec3<T> lhs, const vec3<T> & rhs) { lhs -= rhs; return lhs; }
 	template<class T>
-	static vec3<T> operator*(vec3<T> lhs, const T & rhs) { lhs.x *= rhs; lhs.y *= rhs; return lhs; }
+	static vec3<T> operator*(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
 	template<class T>
-	static vec3<T> operator/(vec3<T> lhs, const T & rhs) { lhs.x /= rhs; lhs.y /= rhs; return lhs; }
+	static vec3<T> operator/(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x / rhs, lhs.y / rhs, lhs.z * rhs); }
 	template<class T>
 	static bool operator==(const vec3<T> & lhs, const vec3<T> & rhs) { return lhs.Equals(rhs); }
 	template<class T>
@@ -154,7 +154,7 @@ namespace n0
 		void SetSize(const T x, const T y) { dimensions.x = x; dimensions.y = y; }
 
 		// utility
-		vec2<T> GetCenter() const { return vec2<T>(position + (dimensions / 2)); }
+		vec2<T> GetCenter() const { return vec2<T>(dimensions / 2); }
 		T GetArea() const { return GetWidth() * GetHeight(); }
 		T GetPerimeter() const { return (GetWidth() << 1) + (GetHeight() << 1); }
 
