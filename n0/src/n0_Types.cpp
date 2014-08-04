@@ -3,7 +3,7 @@
 namespace n0
 {
 	// this is in the .cpp to make the includes simpler (for use of min() ).
-	Colour operator+(const Colour& other) const
+	Colour Colour::operator+(const Colour& other) const
 	{	
 		return Colour(min(GetRed() + other.GetRed(), 255),
 			min(GetGreen() + other.GetGreen(), 255),

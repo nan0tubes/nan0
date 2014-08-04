@@ -175,41 +175,41 @@ namespace n0
 	class rect
 	{
 	protected:
-		vec2<T> position;
-		vec2<T> dimensions;
+		vec2<T> m_position;
+		vec2<T> m_dimensions;
 
 	public:
 		rect<T>() { }
-		rect<T>(const vec2<T> position, const vec2<T> dimensions) : position(position), dimensions(dimensions) { }
-		rect<T>(const rect<T> & other) : position(other.position), dimensions(other.dimensions) { }
+		rect<T>(const vec2<T> position, const vec2<T> dimensions) : m_position(position), m_dimensions(dimensions) { }
+		rect<T>(const rect<T> & other) : m_position(other.m_position), m_dimensions(other.m_dimensions) { }
 
-		rect<T> & operator=(const rect<T> & rhs) { position = rhs.position; dimensions= rhs.dimensions; return *this; }
+		rect<T> & operator=(const rect<T> & rhs) { m_position = rhs.m_position; m_dimensions= rhs.m_dimensions; return *this; }
 
 		// position
-		vec2<T> GetPosition() const { return position; }
-		void SetPosition(const vec2<T> & position) { this->position = position; }
-		void SetPosition(const T x, const T y) { position.x = x; position.y = y; }
+		vec2<T> GetPosition() const { return m_position; }
+		virtual void SetPosition(const vec2<T> & position) { m_position = position; }
+		virtual void SetPosition(const T x, const T y) { m_position.x = x; m_position.y = y; }
 
 		// size
-		T GetWidth() const { return dimensions.x; }
-		void SetWidth(const T & width) { dimensions.x = width; }
-		T GetHeight() const { return dimensions.y; }
-		void SetHeight(const T & height) { dimensions.y = height; }
-		vec2<T> GetSize() const { return dimensions; }
-		void SetSize(const vec2<T> & dimensions) { this->dimensions = dimensions; }
-		void SetSize(const T x, const T y) { dimensions.x = x; dimensions.y = y; }
+		T GetWidth() const { return m_dimensions.x; }
+		void SetWidth(const T & width) { m_dimensions.x = width; }
+		T GetHeight() const { return m_dimensions.y; }
+		void SetHeight(const T & height) { m_dimensions.y = height; }
+		vec2<T> GetSize() const { return m_dimensions; }
+		void SetSize(const vec2<T> & dimensions) { m_dimensions = dimensions; }
+		void SetSize(const T x, const T y) { m_dimensions.x = x; m_dimensions.y = y; }
 
 		// utility
-		vec2<T> GetCenter() const { return dimensions / 2; }
-		T GetArea() const { return dimensions.x * dimensions.y; }
-		T GetPerimeter() const { return (dimensions.x << 1) + (dimensions.y << 1); }
+		vec2<T> GetCenter() const { return m_dimensions / 2; }
+		T GetArea() const { return m_dimensions.x * m_dimensions.y; }
+		T GetPerimeter() const { return (m_dimensions.x << 1) + (m_dimensions.y << 1); }
 
 		bool Contains(const vec2<T> & pt) const { return Contains(pt.x, pt.y); }
-		bool Contains(const T x, const T y) const { return !(x < position.x || x > position.x + dimensions.x || y < position.y() || y > position.y + dimensions.y) }
+		bool Contains(const T x, const T y) const { return !(x < m_position.x || x > m_position.x + m_dimensions.x || y < m_position.y() || y > m_position.y + m_dimensions.y) }
 	};
 
 	template<class T>
-	static bool operator==(const rect<T> & lhs, const rect<T> & rhs) { return lhs.position == rhs.position && lhs.dimensions == rhs.dimensions; }
+	static bool operator==(const rect<T> & lhs, const rect<T> & rhs) { return lhs.m_position == rhs.m_position && lhs.m_dimensions == rhs.m_dimensions; }
 	template<class T>
 	static bool operator!=(const rect<T> & lhs, const rect<T> & rhs) { return !operator==(lhs, rhs); }
 
@@ -250,22 +250,22 @@ namespace n0
 		Colour() : colour(0) { }
 		Colour(const Colour & other) : colour(other.colour) { }
 		Colour(const u32 colour) { Set(colour); }
-		Colour(const u32 r, const u32 g, const u32 b, const u32 a) { Set(r, g, b, a); }
+		Colour(const u8 r, const u8 g, const u8 b, const u8 a) { Set(r, g, b, a); }
 		bool operator==(const Colour& other) const { return colour == other.colour; }
 		bool operator!=(const Colour& other) const { return colour != other.colour; }
 		Colour operator+(const Colour& other) const;
-		
-		void Set(const u32 c) { colour = c; }
-		void Set(const u32 r, const u32 g, const u32 b, const u32 a) { colour = (((r & 0xff)<<24) | ((g & 0xff)<<16) | ((b & 0xff)<<8) | (a & 0xff)); }
 
-		u32 GetRed() const { return colour >> 24; }
-		void SetRed(const u32 r) { colour = ((r & 0xff)<<24) | (colour & 0x00ffffff); }
-		u32 GetGreen() const { return (colour >> 16) & 0xff; }
-		void SetGreen(const u32 g) { colour = ((g & 0xff)<<16) | (colour & 0xff00ffff); }
-		u32 GetBlue() const { return (colour >> 8) & 0xff; }
-		void SetBlue(const u32 b) { colour = ((b & 0xff)<<8) | (colour & 0xffff00ff); }
-		u32 GetAlpha() const { return colour & 0xff; }
-		void SetAlpha(const u32 a) { colour = (a & 0xff) | (colour & 0xffffff00); }
+		void Set(const u32 c) { colour = c; }
+		void Set(const u8 r, const u8 g, const u8 b, const u8 a) { colour = (((r & 0xff)<<24) | ((g & 0xff)<<16) | ((b & 0xff)<<8) | (a & 0xff)); }
+
+		u8 GetRed() const { return colour >> 24; }
+		void SetRed(const u8 r) { colour = ((r & 0xff)<<24) | (colour & 0x00ffffff); }
+		u8 GetGreen() const { return (colour >> 16) & 0xff; }
+		void SetGreen(const u8 g) { colour = ((g & 0xff)<<16) | (colour & 0xff00ffff); }
+		u8 GetBlue() const { return (colour >> 8) & 0xff; }
+		void SetBlue(const u8 b) { colour = ((b & 0xff)<<8) | (colour & 0xffff00ff); }
+		u8 GetAlpha() const { return colour & 0xff; }
+		void SetAlpha(const u8 a) { colour = (a & 0xff) | (colour & 0xffffff00); }
 
 		u32 GetValue() const { return colour; }
 		u32 GetAverage() const { return (GetRed() + GetGreen() + GetBlue()) / 3; }
@@ -274,10 +274,10 @@ namespace n0
 		{
 			d = d < 0.0f ? 0.0f : (d > 1.0f ? 1.0f : d); // clamp
 			const f32 inv = 1.0f - d;
-			return Colour((u32)(other.GetRed() * inv + GetRed() * d),
-				(u32)(other.GetGreen() * inv + GetGreen() * d),
-				(u32)(other.GetBlue() * inv + GetBlue() * d),
-				(u32)(other.GetAlpha() * inv + GetAlpha() * d));
+			return Colour((u8)(other.GetRed() * inv + GetRed() * d),
+				(u8)(other.GetGreen() * inv + GetGreen() * d),
+				(u8)(other.GetBlue() * inv + GetBlue() * d),
+				(u8)(other.GetAlpha() * inv + GetAlpha() * d));
 		}
 	};
 
