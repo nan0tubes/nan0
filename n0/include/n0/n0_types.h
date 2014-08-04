@@ -221,23 +221,29 @@ namespace n0
 	class Anchor
 	{
 	public:
+		// DON'T USE THE BASE ANCHORS FOR POSITIONING
 		static const u8 TOP         = (1 << 0);
 		static const u8 VCENTER     = (1 << 1);
 		static const u8 BOTTOM      = (1 << 2);
 		static const u8 LEFT        = (1 << 3);
 		static const u8 HCENTER     = (1 << 4);
 		static const u8 RIGHT       = (1 << 5);
+		// USE THESE FANCILY NAMED ONES INSTEAD
 		static const u8 TOPLEFT     = TOP | LEFT;
+		static const u8 TOPCENTER   = TOP | HCENTER;
 		static const u8 TOPRIGHT    = TOP | RIGHT;
 		static const u8 BOTTOMLEFT  = BOTTOM | LEFT;
+		static const u8 BOTTOMCENTER= BOTTOM | HCENTER;
 		static const u8 BOTTOMRIGHT = BOTTOM | RIGHT;
-		static const u8 CENTER      = HCENTER | VCENTER;
+		static const u8 CENTERLEFT  = VCENTER | LEFT;
+		static const u8 CENTERCENTER= VCENTER | HCENTER;
+		static const u8 CENTERRIGHT = VCENTER | RIGHT;
 	};
 
 	// COLOUR
 	class Colour
 	{
-	private:
+	protected:
 		u32 colour;
 
 	public:
@@ -245,7 +251,6 @@ namespace n0
 		Colour(const Colour & other) : colour(other.colour) { }
 		Colour(const u32 colour) { Set(colour); }
 		Colour(const u32 r, const u32 g, const u32 b, const u32 a) { Set(r, g, b, a); }
-
 		bool operator==(const Colour& other) const { return colour == other.colour; }
 		bool operator!=(const Colour& other) const { return colour != other.colour; }
 		Colour operator+(const Colour& other) const;
@@ -265,7 +270,15 @@ namespace n0
 		u32 GetValue() const { return colour; }
 		u32 GetAverage() const { return (GetRed() + GetGreen() + GetBlue()) / 3; }
 
-		Colour GetInterpolated(const Colour & other, f32 d) const;
+		Colour GetInterpolated(const Colour & other, f32 d) const
+		{
+			d = d < 0.0f ? 0.0f : (d > 1.0f ? 1.0f : d); // clamp
+			const f32 inv = 1.0f - d;
+			return Colour((u32)(other.GetRed() * inv + GetRed() * d),
+				(u32)(other.GetGreen() * inv + GetGreen() * d),
+				(u32)(other.GetBlue() * inv + GetBlue() * d),
+				(u32)(other.GetAlpha() * inv + GetAlpha() * d));
+		}
 	};
 
 	class Colour4f
@@ -278,16 +291,21 @@ namespace n0
 
 	public:
 		Colour4f() { Set(0.0f, 0.0f, 0.0f, 0.0f); }
+		Colour4f(const f32 r, const f32 g, const f32 b, const f32 a) { Set(r, g, b, a); }
 		Colour4f(const Colour4f & other) { Set(other); }
 		Colour4f(const u32 colour) { Set(Colour(colour)); }
-		Colour4f(const f32 r, const f32 g, const f32 b, const f32 a) { Set(r, g, b, a); }
-		Colour4f(const Colour & other) { const f32 inv = 1.0f / 255.0f; Set(other.GetRed() * inv, g = other.GetGreen() * inv, b = other.GetBlue() * inv, a = other.GetAlpha() * inv); }
+		Colour4f(const Colour & other) { Set(other); }
 
-		void Set(const f32 r, const f32 g, const f32 b, const f32 a);
+		void Set(const f32 r, const f32 g, const f32 b, const f32 a)
+		{
+			// clamp all the things!
+			this->r = r < 0.0f ? 0.0f : (r > 1.0f ? 1.0f : r);
+			this->g = g < 0.0f ? 0.0f : (g > 1.0f ? 1.0f : g);
+			this->b = b < 0.0f ? 0.0f : (b > 1.0f ? 1.0f : b);
+			this->a = a < 0.0f ? 0.0f : (a > 1.0f ? 1.0f : a);
+		}
 		void Set(const Colour4f & other) { Set(other.r, other.g, other.b, other.a); }
-		void Set(const Colour & other) { Set((f32)other.GetRed(), (f32)other.GetGreen(), (f32)other.GetBlue(), (f32)other.GetAlpha()); }
-
-		Colour ToColour() const { return Colour((u32)(r * 255.0f), (u32)(g * 255.0f), (u32)( b * 255.0f), (u32)(a * 255.0f)); }
+		void Set(const Colour & other) { const f32 inv = 1.0f / 255.0f; Set(other.GetRed() * inv, g = other.GetGreen() * inv, b = other.GetBlue() * inv, a = other.GetAlpha() * inv); }
 
 		f32 GetRed() const { return r; }
 		f32 GetGreen() const { return g; }
@@ -296,7 +314,14 @@ namespace n0
 
 		f32 GetAverage() const { return (GetRed() + GetGreen() + GetBlue()) / 3.0f; }
 
-		Colour4f GetInterpolated(const Colour4f & other, f32 d) const;
+		Colour4f GetInterpolated(const Colour4f & other, f32 d) const
+		{
+			d = d < 0.0f ? 0.0f : (d > 1.0f ? 1.0f : d); // clamp
+			const f32 inv = 1.0f - d;
+			return Colour4f(other.r * inv + r * d, other.g * inv + g * d, other.b * inv + b * d, other.a * inv + a * d);
+		}
+
+		Colour ToColour() const { return Colour((u32)(r * 255.0f), (u32)(g * 255.0f), (u32)( b * 255.0f), (u32)(a * 255.0f)); }
 	};
 
 	struct Vertex 
