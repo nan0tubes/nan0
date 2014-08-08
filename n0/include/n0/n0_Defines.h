@@ -61,7 +61,7 @@ inline f64 DegToRad(f64 deg) { return DEGTORAD64 * deg; }
 
 #define kMaxFilenameLength 512
 
-// colour codes, from http://www.w3schools.com/html/html_colornames.asp
+// colour codes, from http://www.w3schools.com/html/html_colornames.asp and are in ARGB format
 #define kColour_Black	0xff000000
 #define kColour_Navy 	0xff000080
 #define kColour_DarkBlue 	0xff00008B	 

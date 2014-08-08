@@ -240,7 +240,7 @@ namespace n0
 		static const u8 CENTERRIGHT = VCENTER | RIGHT;
 	};
 
-	// COLOUR
+	// COLOUR (RGBA)
 	class Colour
 	{
 	protected:
@@ -281,6 +281,7 @@ namespace n0
 		}
 	};
 
+	// COLOUR (RGBA floats) 
 	class Colour4f
 	{
 	private:
