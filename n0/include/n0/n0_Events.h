@@ -63,28 +63,39 @@ struct KeyEvent : public n0Event
 	enum EKeyEvent{ kEvent_KeyDown = 100,kEvent_KeyUp, kEvent_KeyRepeat, kEvent_KeyCount};
 };
 
-struct SInputEvent : public n0Event
+struct SMouseEvent : public n0Event
 {
-	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %p", m_type, pData); }
-	SInputEvent(u32 type, void *data = 0) : n0Event(type, data) { }
-	enum EInputEventType {
-		kEvent_Input_First = 200,
-		kEvent_InputLeft_Down = kEvent_Input_First, kEvent_InputLeft_Up,
-		kEvent_InputRight_Down, kEvent_InputRight_Up,
-		kEvent_InputUp_Down, kEvent_InputUp_Up,
-		kEvent_InputDown_Down, kEvent_InputDown_Up,
-		kEvent_InputA1_Down, kEvent_InputA1_Up,
-		kEvent_InputA2_Down, kEvent_InputA2_Up,
-		kEvent_InputA3_Down, kEvent_InputA3_Up,
-		kEvent_InputA4_Down, kEvent_InputA4_Up,
-		kEvent_InputA5_Down, kEvent_InputA5_Up,
-		kEvent_InputA6_Down, kEvent_InputA6_Up,
-		kEvent_InputReset_Down, kEvent_InputReset_Up,
-		kEvent_InputQuit_Down, kEvent_InputQuit_Up,
 
-		kEvent_InputType_Count
-	};
 };
+
+struct STouchEvent : public n0Event
+{
+
+
+};
+
+// struct SInputEvent : public n0Event
+// {
+// 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %p", m_type, pData); }
+// 	SInputEvent(u32 type, void *data = 0) : n0Event(type, data) { }
+// 	enum EInputEventType {
+// 		kEvent_Input_First = 200,
+// 		kEvent_InputLeft_Down = kEvent_Input_First, kEvent_InputLeft_Up,
+// 		kEvent_InputRight_Down, kEvent_InputRight_Up,
+// 		kEvent_InputUp_Down, kEvent_InputUp_Up,
+// 		kEvent_InputDown_Down, kEvent_InputDown_Up,
+// 		kEvent_InputA1_Down, kEvent_InputA1_Up,
+// 		kEvent_InputA2_Down, kEvent_InputA2_Up,
+// 		kEvent_InputA3_Down, kEvent_InputA3_Up,
+// 		kEvent_InputA4_Down, kEvent_InputA4_Up,
+// 		kEvent_InputA5_Down, kEvent_InputA5_Up,
+// 		kEvent_InputA6_Down, kEvent_InputA6_Up,
+// 		kEvent_InputReset_Down, kEvent_InputReset_Up,
+// 		kEvent_InputQuit_Down, kEvent_InputQuit_Up,
+// 
+// 		kEvent_InputType_Count
+// 	};
+// };
 
 struct SSceneEvent : public n0Event
 {
@@ -105,34 +116,35 @@ struct SSceneEvent : public n0Event
 	};
 };
 
-struct SGUIEvent : n0Event
-{
-	u32 sceneID;
-	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, pData: %p", m_type, sceneID, pData); }
-	SGUIEvent(u32 type, u32 id, void *data = 0) : n0Event(type, data),sceneID(id) { }
-	enum EGUIEventType {
-		kEvent_GUI_First = 400,
-		kEvent_GUI_ButtonClicked = kEvent_GUI_First,
-
-		kEvent_GUIType_Count
-	};
-};
-
-struct SAchievementEvent : n0Event
-{
-	u32 m_id;
-	u32 m_value;
-	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, Val: %u,  pData: %p", m_type, m_id, m_value, pData); }
-	SAchievementEvent(u32 type, u32 id, u32 val, void *data = 0) : n0Event(type, data), m_id(id), m_value(val) { }
-	enum EAchievementType {
-		kEvent_Achievement_GameNotification = 500,
-		kEvent_Achievement_AchievementProgress,
-		kEvent_Achievement_AchievementComplete,
-
-		kEvent_AchievementType_Count
-	};
-};
-
+// 
+// struct SGUIEvent : n0Event
+// {
+// 	u32 sceneID;
+// 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, pData: %p", m_type, sceneID, pData); }
+// 	SGUIEvent(u32 type, u32 id, void *data = 0) : n0Event(type, data),sceneID(id) { }
+// 	enum EGUIEventType {
+// 		kEvent_GUI_First = 400,
+// 		kEvent_GUI_ButtonClicked = kEvent_GUI_First,
+// 
+// 		kEvent_GUIType_Count
+// 	};
+// };
+// 
+// struct SAchievementEvent : n0Event
+// {
+// 	u32 m_id;
+// 	u32 m_value;
+// 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, ID: %u, Val: %u,  pData: %p", m_type, m_id, m_value, pData); }
+// 	SAchievementEvent(u32 type, u32 id, u32 val, void *data = 0) : n0Event(type, data), m_id(id), m_value(val) { }
+// 	enum EAchievementType {
+// 		kEvent_Achievement_GameNotification = 500,
+// 		kEvent_Achievement_AchievementProgress,
+// 		kEvent_Achievement_AchievementComplete,
+// 
+// 		kEvent_AchievementType_Count
+// 	};
+// };
+// 
 
 };
 

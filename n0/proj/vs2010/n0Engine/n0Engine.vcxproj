@@ -85,10 +85,14 @@
     <ClInclude Include="..\..\..\include\n0\n0_Events.h" />
     <ClInclude Include="..\..\..\include\n0\n0_File.h" />
     <ClInclude Include="..\..\..\include\n0\n0_graphics.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_InputEvents.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Mutex.h" />
     <ClInclude Include="..\..\..\include\n0\n0_platform.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_RefCounted.h" />
     <ClInclude Include="..\..\..\include\n0\n0_scene.h" />
     <ClInclude Include="..\..\..\include\n0\n0_StaticBuffer.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Texture.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_TextureManager.h" />
     <ClInclude Include="..\..\..\include\n0\n0_types.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_android.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_iphone.h" />
@@ -100,11 +104,11 @@
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIMouseOver.h" />
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIObject.h" />
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h" />
-    <ClInclude Include="..\..\..\include\n0_RefCounted.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\include\n0_RefManager.cpp" />
+    <ClCompile Include="..\..\..\src\n0_InputEvents.cpp" />
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
+    <ClCompile Include="..\..\..\src\n0_RefManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
     <ClCompile Include="..\..\..\src\n0_Types.cpp" />

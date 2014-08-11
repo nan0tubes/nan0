@@ -25,12 +25,16 @@
 #include "IDrawable.h"
 #include "IEventHandler.h"
 #include "n0_RefCounted.h"
+#include "n0_Texture.h"
+#include "n0_TextureManager.h"
 
 #include "n0_DelayTimer.h"
 #include "n0_File.h"
 #include "n0_graphics.h"
 #include "n0_Mutex.h"
 #include "n0_StaticBuffer.h"
+
+#include "n0_InputEvents.h"
 
 
 

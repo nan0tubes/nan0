@@ -108,7 +108,16 @@
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\n0_RefCounted.h">
+    <ClInclude Include="..\..\..\include\n0\n0_InputEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_RefCounted.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,7 +149,10 @@
     <ClCompile Include="..\..\..\src\n0_Types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\include\n0_RefManager.cpp">
+    <ClCompile Include="..\..\..\src\n0_RefManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_InputEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
