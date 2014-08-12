@@ -186,11 +186,15 @@ namespace n0
 		rect<T> & operator=(const rect<T> & rhs) { m_position = rhs.m_position; m_dimensions= rhs.m_dimensions; return *this; }
 
 		// position
+		T * GetX() { return &m_position.x; }
+		T * GetY() { return &m_position.y; }
 		vec2<T> GetPosition() const { return m_position; }
 		virtual void SetPosition(const vec2<T> & position) { m_position = position; }
 		virtual void SetPosition(const T x, const T y) { m_position.x = x; m_position.y = y; }
 
 		// size
+		T * GetW() { return &m_dimensions.x; }
+		T * GetH() { return &m_dimensions.y; }
 		T GetWidth() const { return m_dimensions.x; }
 		void SetWidth(const T & width) { m_dimensions.x = width; }
 		T GetHeight() const { return m_dimensions.y; }
