@@ -43,7 +43,7 @@ bool n0InputEvents::OnEvent(n0Event *_evt)
 	std::vector<InputEvent>::iterator it;
 	for(it = m_triggerEvents.begin(); it != m_triggerEvents.end(); it++)
 	{
-		if(_evt->m_type = it->triggerID)
+		if(_evt->m_type == it->triggerID)
 		{
 			n0Event evt(it->eventName,it->data != NULL ? it->data : _evt->pData);
 			FireEvent(&evt);

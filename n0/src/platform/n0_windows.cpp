@@ -42,6 +42,7 @@ namespace n0
 
 		LRESULT CALLBACK HandleWindowMessages(HWND nativeWindow, UINT message, WPARAM windowParameters, LPARAM longWindowParameters)
 		{
+			POINT pt; GetCursorPos(&pt); ScreenToClient(nativeWindow,&pt);
 			switch (message)
 			{
 			case WM_SYSCOMMAND:
@@ -72,7 +73,6 @@ namespace n0
 				}
 			case WM_MBUTTONDOWN:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_MiddleMBDown,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -80,7 +80,6 @@ namespace n0
 				break;
 			case WM_MBUTTONUP:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_MiddleMBUp,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -89,7 +88,6 @@ namespace n0
 
 			case WM_MOUSEMOVE:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_MouseMove,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -97,7 +95,6 @@ namespace n0
 				break;
 			case WM_LBUTTONDOWN:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_LeftMBDown,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -105,7 +102,6 @@ namespace n0
 				break;
 			case WM_LBUTTONUP:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_LeftMBUp,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -114,7 +110,6 @@ namespace n0
 
 			case WM_RBUTTONDOWN:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_RightMBDown,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
@@ -123,7 +118,6 @@ namespace n0
 
 			case WM_RBUTTONUP:
 				{
-					POINT pt; GetCursorPos(&pt);
 					SMouseEventData data; data.x = pt.x; data.y = pt.y;
 					SMouseEvent evt(SMouseEvent::kEvent_RightMBUp,&data);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
