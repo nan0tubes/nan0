@@ -5,7 +5,7 @@ namespace n0
 {
 
 
-class n0InputEvents : IEventHandler<128>  , IEventListener 
+class n0InputEvents : public IEventHandler<128>  , public IEventListener 
 {
 	struct InputEvent{
 		u32 triggerID;
@@ -17,15 +17,18 @@ class n0InputEvents : IEventHandler<128>  , IEventListener
 
 	std::vector<InputEvent> m_triggerEvents;
 
-public:
+private:
 	n0InputEvents();
 	virtual ~n0InputEvents();
-
+	static n0InputEvents *s_Instance;
 public:
-	virtual bool OnEvent(n0Event *) = 0;
+	virtual bool OnEvent(n0Event *);
 
-	virtual void RegisterInputEvent( unsigned int tiggerEventID, unsigned int triggerEventData,char *eventName, void *pUserData);
+	virtual void RegisterInputEvent( unsigned int triggerEventID, unsigned int triggerEventData,char *eventName, void *pUserData);
 
+
+static n0InputEvents * GetInstance();
+static void DestroyInstance();
 };
 
 

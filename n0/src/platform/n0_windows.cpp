@@ -70,7 +70,68 @@ namespace n0
 					// Return 1 to let Windows know the message has been successfully handled
 					return 1;
 				}
+			case WM_MBUTTONDOWN:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_MiddleMBDown,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+			case WM_MBUTTONUP:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_MiddleMBUp,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+
+			case WM_MOUSEMOVE:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_MouseMove,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+			case WM_LBUTTONDOWN:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_LeftMBDown,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+			case WM_LBUTTONUP:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_LeftMBUp,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+
+			case WM_RBUTTONDOWN:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_RightMBDown,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
+
+			case WM_RBUTTONUP:
+				{
+					POINT pt; GetCursorPos(&pt);
+					SMouseEventData data; data.x = pt.x; data.y = pt.y;
+					SMouseEvent evt(SMouseEvent::kEvent_RightMBUp,&data);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+				break;
 			}
+
+			
 
 			// Calls the default window procedure for messages we did not handle
 			return DefWindowProc(nativeWindow, message, windowParameters, longWindowParameters);

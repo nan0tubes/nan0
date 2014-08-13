@@ -63,14 +63,23 @@ struct KeyEvent : public n0Event
 	enum EKeyEvent{ kEvent_KeyDown = 100,kEvent_KeyUp, kEvent_KeyRepeat, kEvent_KeyCount};
 };
 
+
+struct SMouseEventData 
+{
+	int x;
+	int y;
+};
 struct SMouseEvent : public n0Event
 {
+	
+	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %i %i", m_type, ((SMouseEventData*)pData)->x,((SMouseEventData*)pData)->y); }
+	SMouseEvent(u32 type, void *data =0 ) : n0Event(type,data) {}
+	enum EMouseEvent{ kEvent_LeftMBDown = 200,kEvent_LeftMBUp, kEvent_RightMBDown, kEvent_RightMBUp,kEvent_MiddleMBDown,kEvent_MiddleMBUp, kEvent_MouseMove};
 
 };
 
 struct STouchEvent : public n0Event
 {
-
 
 };
 
@@ -104,7 +113,7 @@ struct SSceneEvent : public n0Event
 	SSceneEvent(u32 type, u32 id, void *data = 0):n0Event(type,data),sceneID(id) {}
 	enum ESceneEvent
 	{
-		kEvent_SceneCreated = 300,
+		kEvent_SceneCreated = 1000,
 		kEvent_SceneShowing,
 		kEvent_SceneUpdating,
 		kEvent_SceneEndShowing,
