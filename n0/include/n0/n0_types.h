@@ -249,6 +249,7 @@ namespace n0
 	{
 	protected:
 		u32 colour;
+		char retbuf[16];
 
 	public:
 		Colour() : colour(0) { }
@@ -272,6 +273,7 @@ namespace n0
 		void SetAlpha(const u8 a) { colour = (a & 0xff) | (colour & 0xffffff00); }
 
 		u32 GetValue() const { return colour; }
+		char * GetHex();
 		u32 GetAverage() const { return (GetRed() + GetGreen() + GetBlue()) / 3; }
 
 		Colour GetInterpolated(const Colour & other, f32 d) const

@@ -10,4 +10,10 @@ namespace n0
 			min(GetBlue() + other.GetBlue(), 255),
 			min(GetAlpha() + other.GetAlpha(), 255)); 
 	}
+	
+	char * Colour::GetHex()
+	{
+		sprintf(retbuf, "0x%08x", colour); return retbuf;
+	}
+
 }
