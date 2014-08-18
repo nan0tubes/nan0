@@ -47,10 +47,11 @@ bool n0InputEvents::OnEvent(n0Event *_evt)
 		{
 			n0Event evt(it->eventName,it->data != NULL ? it->data : _evt->pData);
 			FireEvent(&evt);
+			didHandle = true;
 		}
 
 	}
-	
+
 	return didHandle;
 }
 

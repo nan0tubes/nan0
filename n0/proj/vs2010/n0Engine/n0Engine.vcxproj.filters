@@ -131,21 +131,6 @@
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\UI\fwUIButton.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\UI\fwUIManager.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\UI\fwUIObject.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\UI\fwUIWindow.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\platform\n0_windows.cpp">
-      <Filter>Source Files\platform</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\n0_Types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -154,6 +139,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\n0_InputEvents.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="no_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\platform\n0_windows.cpp">
+      <Filter>Source Files\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\UI\n0_UIButton.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\UI\n0_UIManager.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\UI\n0_UIObject.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\UI\n0_UIWindow.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

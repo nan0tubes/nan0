@@ -64,6 +64,7 @@ namespace n0
 	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2);
 	bool EndFrame();
 
+
 }; // namespace nan0
 
 #endif

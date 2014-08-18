@@ -14,6 +14,6 @@ namespace n0
 	private:
 		n0Texture() {}
 		~n0Texture() {}
-		n0Texture(u32 texID, u32 texWidth, u32 texHeight, u32 bpp, u32 colorspace) {}
+		n0Texture(u32 texID, u32 texWidth, u32 texHeight, u32 bpp, u32 colorspace);
 	};
 }

@@ -12,6 +12,8 @@
 	#define NULL 0
 #endif
 
+#define n0_FlushGLError() { u32 err; while(err = glGetError()) { printf("GL ERROR #%d - %s:%d",err,__FILE__,__LINE__); }; }
+
 #define NEW new
 #define SAFE_DELETE(p) { if (p) delete (p); p = NULL; }
 

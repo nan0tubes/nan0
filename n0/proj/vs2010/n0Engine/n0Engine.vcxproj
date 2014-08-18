@@ -113,10 +113,11 @@
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
     <ClCompile Include="..\..\..\src\n0_Types.cpp" />
     <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
-    <ClCompile Include="..\..\..\src\UI\fwUIButton.cpp" />
-    <ClCompile Include="..\..\..\src\UI\fwUIManager.cpp" />
-    <ClCompile Include="..\..\..\src\UI\fwUIObject.cpp" />
-    <ClCompile Include="..\..\..\src\UI\fwUIWindow.cpp" />
+    <ClCompile Include="..\..\..\src\UI\n0_UIButton.cpp" />
+    <ClCompile Include="..\..\..\src\UI\n0_UIManager.cpp" />
+    <ClCompile Include="..\..\..\src\UI\n0_UIObject.cpp" />
+    <ClCompile Include="..\..\..\src\UI\n0_UIWindow.cpp" />
+    <ClCompile Include="no_texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
