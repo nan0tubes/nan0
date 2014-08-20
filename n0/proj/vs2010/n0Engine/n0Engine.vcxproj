@@ -86,6 +86,8 @@
     <ClInclude Include="..\..\..\include\n0\n0_File.h" />
     <ClInclude Include="..\..\..\include\n0\n0_graphics.h" />
     <ClInclude Include="..\..\..\include\n0\n0_InputEvents.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Material.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_MaterialManager.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Mutex.h" />
     <ClInclude Include="..\..\..\include\n0\n0_platform.h" />
     <ClInclude Include="..\..\..\include\n0\n0_RefCounted.h" />
@@ -107,17 +109,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\n0_InputEvents.cpp" />
+    <ClCompile Include="..\..\..\src\n0_Material.cpp" />
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
+    <ClCompile Include="..\..\..\src\n0_MaterialManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_RefManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
+    <ClCompile Include="..\..\..\src\n0_texture.cpp" />
+    <ClCompile Include="..\..\..\src\n0_TextureManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_Types.cpp" />
     <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
     <ClCompile Include="..\..\..\src\UI\n0_UIButton.cpp" />
     <ClCompile Include="..\..\..\src\UI\n0_UIManager.cpp" />
     <ClCompile Include="..\..\..\src\UI\n0_UIObject.cpp" />
     <ClCompile Include="..\..\..\src\UI\n0_UIWindow.cpp" />
-    <ClCompile Include="no_texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

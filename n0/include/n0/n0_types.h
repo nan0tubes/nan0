@@ -1,6 +1,5 @@
 #ifndef __FW_TYPES_H__
 #define __FW_TYPES_H__
-
 	// TYPES
 	// base types are borrowed from the Irrlicht Engine (irrTypes.h)
 	// Copyright (C) 2002-2012 Nikolaus Gebhardt

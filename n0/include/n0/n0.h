@@ -9,11 +9,23 @@
 */
 #pragma once
 
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
+#include <stack>
+#include <queue>
+#include <list>
+#include <map>
+#include <vector>
+#include <array>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
 //
 
 #include "n0_types.h"
 #include "n0_Defines.h"
-#include "n0_platform.h"
+
 
 
 #include "n0_Array.h"
@@ -25,8 +37,12 @@
 #include "IDrawable.h"
 #include "IEventHandler.h"
 #include "n0_RefCounted.h"
+
+#include "n0_platform.h"
 #include "n0_Texture.h"
 #include "n0_TextureManager.h"
+#include "n0_Material.h"
+#include "n0_MaterialManager.h"
 
 #include "n0_DelayTimer.h"
 #include "n0_File.h"

@@ -26,7 +26,7 @@
 
 namespace n0
 {
-
+	class n0Texture;
 
 /*******************************************************************************************************************************************
  Global variables
@@ -62,6 +62,8 @@ namespace n0
 	void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f colourNE, Colour4f colourSE, Colour4f colourSW);
 	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour);
 	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2);
+
+	void DrawTextureRect(float x, float y, float w, float h, n0Texture *Texture);
 	bool EndFrame();
 
 
