@@ -52,7 +52,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../../../framewerks/lib/zlib-1.2.8/include;$(SolutionDir)../../../../../framewerks/lib/libpng-1.2.51;$(SolutionDir)../../../../../framewerks/lib/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,7 +68,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../../../framewerks/lib/zlib-1.2.8/include;$(SolutionDir)../../../../../framewerks/lib/libpng-1.2.51;$(SolutionDir)../../../../../framewerks/lib/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -116,7 +116,7 @@
     <ClInclude Include="..\..\..\include\n0\ui\n0_UIWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\jsoncpp\dist\jsoncpp.cpp" />
+    <ClCompile Include="..\..\..\lib\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="..\..\..\src\n0_InputEvents.cpp" />
     <ClCompile Include="..\..\..\src\n0_Material.cpp" />
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />

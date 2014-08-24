@@ -176,7 +176,7 @@
     <ClCompile Include="..\..\..\src\n0_MaterialManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\jsoncpp\dist\jsoncpp.cpp">
+    <ClCompile Include="..\..\..\lib\jsoncpp\jsoncpp.cpp">
       <Filter>Source Files\externals</Filter>
     </ClCompile>
   </ItemGroup>
