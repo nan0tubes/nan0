@@ -7,7 +7,8 @@
 *	Copyright nanzero interactive 2014
 *
 */
-#pragma once
+#ifndef __n0_h__
+#define __n0_h__
 
 #include <cassert>
 #include <cstdio>
@@ -22,6 +23,9 @@
 #include <fstream>
 #include <algorithm>
 //
+
+#include <png.hpp>
+#include <json/json.h>
 
 #include "n0_types.h"
 #include "n0_Defines.h"
@@ -59,3 +63,5 @@
 
 
 #include "ui\n0_ui.h"
+
+#endif // __n0_h__

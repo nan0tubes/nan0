@@ -25,6 +25,9 @@
     <Filter Include="Source Files\ui">
       <UniqueIdentifier>{e726a805-34f9-4c15-8fdb-50a58b1122be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\externals">
+      <UniqueIdentifier>{39f418b6-6bc5-46ea-9367-c569e6d8cb89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\n0\n0.h">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\n0_MaterialManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\jsoncpp\dist\jsoncpp.cpp">
+      <Filter>Source Files\externals</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
