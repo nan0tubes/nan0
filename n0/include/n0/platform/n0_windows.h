@@ -4,7 +4,7 @@
 
 #define n0_WIN32
 #define N0_SIMPLE_MUTEX
-
+#include "png.hpp"
 #include "windows.h"
 #include <tchar.h>
 

@@ -52,13 +52,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../../../framewerks/lib/zlib-1.2.8/include;$(SolutionDir)../../../../../framewerks/lib/libpng-1.2.51;$(SolutionDir)../../../../../framewerks/lib/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../lib/zlib-1.2.8/include;$(SolutionDir)../../../lib/png;$(SolutionDir)../../../lib/png/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../../../libpng-1.2.51/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libpng.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -68,7 +69,8 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../../../../zlib-1.2.8/include;$(SolutionDir)../../../../../../libpng-1.2.51;$(SolutionDir)../../../../../../png++;$(SolutionDir)../../../../../../jsoncpp/dist;$(SolutionDir)../../../../../framewerks/lib/zlib-1.2.8/include;$(SolutionDir)../../../../../framewerks/lib/libpng-1.2.51;$(SolutionDir)../../../../../framewerks/lib/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../../lib/zlib-1.2.8/include;$(SolutionDir)../../../lib/png;$(SolutionDir)../../../lib/png/png++;$(SolutionDir)../../../lib/jsoncpp;$(SolutionDir)../../../include/;$(SolutionDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -76,7 +78,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../../../libpng-1.2.51/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libpng.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
