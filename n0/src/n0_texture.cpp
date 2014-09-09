@@ -13,37 +13,58 @@ namespace n0
 		}
 		val = 1<<i;
 	}
+
 #define SWAP( x, y) { x ^= y; y ^= x; x ^= y;}
+
 n0Texture::n0Texture(u32 texID, u32 texWidth, u32 texHeight, u32 bpp, u32 colorspace)
 	:width(texWidth), height(texHeight), textureID(texID), bpp(bpp), colorspace(colorspace)
 {
+	//glEnable(GL_TEXTURE_2D);
+	while( glGetError());
 	glGenTextures(1,&glID);
 	glBindTexture(GL_TEXTURE_2D, glID);
 	Pow2(texWidth);
 	Pow2(texHeight);
-	u16 val = 0xffff;
-	u16 val2 = 0x0000;
-	u16 * fakeData = (u16*)malloc(texWidth*texHeight * sizeof(u16));
-	for(u32 y = 0; y < texHeight ; y++)
+	u32 val = 0xff00ff00;
+	u32 val2 = 0xff0000FF;
+	u32 * fakeData = (u32*)malloc(texWidth*texHeight * sizeof(u32));
+
+	for(int y = 0; y < texHeight ; y++)
 	{
-		if(y % 16 == 0)
-			SWAP(val,val2);
-		for(u32 x = 0; x < texWidth && texWidth > 16; x +=16)
+		if(y%16 == 0)
 		{
-			memset(&fakeData[y*texWidth + x],val,16);
 			SWAP(val,val2);
 		}
+		for(int x = 0; x < texWidth ; x++)
+		{
+			if(x%16 == 0)
+			{
+				SWAP(val,val2);
+			}
+			fakeData[y*texWidth + x] = val;
+	
+		}
+
 	}
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, fakeData);
 
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST); // Linear Filtering
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST); // Linear Filtering
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fakeData);
 
-	n0_FlushGLError();
+
+	//n0_FlushGLError();
+	 u32 err; 
+	 while(err = glGetError()) 
+	 { 
+		 printf("GL ERROR #%d - %s:%d",err,__FILE__,__LINE__);
+	 };
+//	 glDisable(GL_TEXTURE_2D);
 }
 
 void n0Texture::Bind(u32 slot)
 {
+//	glEnable(GL_TEXTURE_2D);
 	glBindTexture(slot, glID);
 
 }

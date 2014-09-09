@@ -5,13 +5,16 @@ namespace n0
 
 	// Handles for the two shaders used to draw the triangle, and the program handle which combines them.
 	GLuint fragmentShader = 0, vertexShader = 0;
-	GLuint shaderProgram = 0;
+	GLuint shaderProgram = 0, textureShader = 0;
 
 	// A vertex buffer object to store our model data.
 	GLuint	vertexBuffer = 0;
 
 	GLuint VERTEX_ARRAY = 0;
 	GLuint COLOR_ARRAY= 1;
+
+	GLuint UV_ARRAY = 2;
+	GLuint TEX_UNI = 3;
 
 	float *transformationMatrix;
 
@@ -745,6 +748,140 @@ bool InitialiseShaders( GLuint &fragmentShader, GLuint &vertexShader, GLuint &sh
 		return false;
 	}
 
+	const char* const fragmentTexShaderSource = "\
+											 precision mediump float;\
+											 varying vec4 outColor;\
+											 varying vec2 outUV;\
+											 uniform sampler2D myTex;\
+											 \
+											 void main (void)\
+											 {\
+												  gl_FragColor = texture2D(myTex, outUV);\
+											 }";
+
+	// Create a fragment shader object
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+	// Load the source code into it
+	glShaderSource(fragmentShader, 1, (const char**)&fragmentTexShaderSource, NULL);
+
+	// Compile the source code
+	glCompileShader(fragmentShader);
+
+	// Check that the shader compiled
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isShaderCompiled);
+	if (!isShaderCompiled)
+	{
+		// If an error happened, first retrieve the length of the log message
+		int infoLogLength, charactersWritten;
+		glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+		// Allocate enough space for the message and retrieve it
+		char* infoLog = new char[infoLogLength];
+		glGetShaderInfoLog(fragmentShader, infoLogLength, &charactersWritten, infoLog);
+
+
+
+		delete[] infoLog;
+		return false;
+	}
+	
+	/*	Concept: Vertex Shaders
+		Vertex shaders primarily exist to allow a developer to express how to orient vertices in 3D space, through transformations like 
+		Scaling, Translation or Rotation. Using the same basic layout and structure as a fragment shader, these take in vertex data and 
+		output a fully transformed set of positions. Other inputs are also able to be used such as normals or texture coordinates, and can 
+		also be transformed and output alongside the position data.
+	*/
+	// Vertex shader code
+	const char* const vertexTexShaderSource = "\
+										   attribute vec4	myVertex;\
+										   attribute vec4 inColor;\
+										   attribute vec2 uv;\
+										   \
+										   uniform mediump mat4	transformationMatrix;\
+										   \
+										   varying vec4 outColor;\
+										   varying vec2 outUV;\
+										   void main(void)\
+										   {\
+										   outUV = uv;\
+										   outColor = inColor;\
+										   gl_Position = transformationMatrix*myVertex;\
+										   }";
+
+	// Create a vertex shader object
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+	// Load the source code into the shader
+	glShaderSource(vertexShader, 1, (const char**)&vertexTexShaderSource, NULL);
+
+	// Compile the shader
+	glCompileShader(vertexShader);
+
+	// Check the shader has compiled
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isShaderCompiled);
+	if (!isShaderCompiled)
+	{
+		// If an error happened, first retrieve the length of the log message
+		int infoLogLength, charactersWritten;
+		glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+		// Allocate enough space for the message and retrieve it
+		char* infoLog = new char[infoLogLength];
+		glGetShaderInfoLog(vertexShader, infoLogLength, &charactersWritten, infoLog);
+
+		// Display the error in a dialog box
+
+		delete[] infoLog;
+		return false;
+	}
+
+	// Create the shader program
+	textureShader = glCreateProgram();
+
+	// Attach the fragment and vertex shaders to it
+	glAttachShader(textureShader, fragmentShader);
+	glAttachShader(textureShader, vertexShader);
+	
+	glBindAttribLocation(textureShader,VERTEX_ARRAY,"myVertex");
+	glBindAttribLocation(textureShader,COLOR_ARRAY,"inColor");
+	glBindAttribLocation(textureShader,UV_ARRAY,"uv");
+	// Link the program
+	glLinkProgram(textureShader);
+	
+
+	// Check if linking succeeded in the same way we checked for compilation success
+	glGetProgramiv(textureShader, GL_LINK_STATUS, &isLinked);
+	if (!isLinked)
+	{
+		// If an error happened, first retrieve the length of the log message
+		int infoLogLength, charactersWritten;
+		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+		// Allocate enough space for the message and retrieve it
+		char* infoLog = new char[infoLogLength];
+		glGetProgramInfoLog(shaderProgram, infoLogLength, &charactersWritten, infoLog);
+
+
+		delete[] infoLog;
+		return false;
+	}
+	
+	/*	Use the Program
+		Calling glUseProgram tells OpenGL ES that the application intends to use this program for rendering. Now that it's installed into
+		the current state, any further glDraw* calls will use the shaders contained within it to process scene data. Only one program can
+		be active at once, so in a multi-program application this function would be called in the render loop. Since this application only
+		uses one program it can be installed in the current state and left there.
+	*/
+	glUseProgram(textureShader);
+
+	TEX_UNI = glGetUniformLocation(textureShader,"myTex");
+
+	if (!windows::TestGLError(nativeWindow, "glUseProgram"))
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -778,7 +915,10 @@ bool StartFrame( )
 	// Get the location of the transformation matrix in the shader using its name
 	int matrixLocation = glGetUniformLocation(shaderProgram, "transformationMatrix");
 
-	// Matrix used to specify the orientation of the triangle on screen.
+	// Pass the transformationMatrix to the shader using its location
+	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
+
+	matrixLocation = glGetUniformLocation(textureShader, "transformationMatrix");
 
 	// Pass the transformationMatrix to the shader using its location
 	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
@@ -832,7 +972,8 @@ void DrawRect(float x, float y, float w, float h, Colour4f colour)
 void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f colourNE, Colour4f colourSE, Colour4f colourSW)
 {
 	memset(vertexData,0,sizeof(Vertex)*MAX_VERTEX);
-
+	glUseProgram(shaderProgram);
+	windows::TestGLError(windows::nativeWindow,"glUseProgram");
 	//botleft
 	vertexData[0].pos.x = x; vertexData[0].pos.y = y; vertexData[0].c.Set(colourSW);
 	vertexData[1].pos.x = x; vertexData[1].pos.y = y + h; vertexData[1].c.Set(colourNW);
@@ -844,7 +985,7 @@ void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f co
 
 
 
-	glUseProgram(shaderProgram);
+	//glUseProgram(shaderProgram);
 
 	// Bind buffer as an vertex buffer so we can fill it with data
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -870,9 +1011,62 @@ void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f co
 	glDisableVertexAttribArray(VERTEX_ARRAY);
 	glDisableVertexAttribArray(COLOR_ARRAY);
 
-
 }
 
+void DrawTexturedRect(float x, float y, float w, float h)
+{
+	DrawTexturedRect(x,y,w,h,0.f,0.f,1.f,1.f);
+}
+
+void DrawTexturedRect(float x, float y, float w, float h,float u1, float v1, float u2, float v2)
+{
+	memset(vertexData,0,sizeof(Vertex)*MAX_VERTEX);
+	while(glGetError());
+	glUseProgram(textureShader);
+	windows::TestEGLError(windows::nativeWindow,"glUseProgram");
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(TEX_UNI,0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE,GL_ZERO);
+
+//	glEnable(GL_TEXTURE_2D);
+	//botleft
+	vertexData[0].pos.x = x; vertexData[0].pos.y = y; vertexData[0].c.Set(1.f,1.f,1.f,1.f); vertexData[0].uv1.x = u1; vertexData[0].uv1.y = v1;
+	vertexData[1].pos.x = x; vertexData[1].pos.y = y + h; vertexData[1].c.Set(1.f,1.f,1.f,1.f); vertexData[1].uv1.x = u1; vertexData[1].uv1.y = v2;
+	vertexData[2].pos.x = x + w; vertexData[2].pos.y = y + h; vertexData[2].c.Set(1.f,1.f,1.f,1.f); vertexData[2].uv1.x = u2; vertexData[2].uv1.y = v2;
+	//TopRight
+	vertexData[3].pos.x = x; vertexData[3].pos.y = y; vertexData[3].c.Set(1.f,1.f,1.f,1.f); vertexData[3].uv1.x = u1; vertexData[3].uv1.y = v1;
+	vertexData[4].pos.x = x + w; vertexData[4].pos.y = y; vertexData[4].c.Set(1.f,1.f,1.f,1.f); vertexData[4].uv1.x = u2; vertexData[4].uv1.y = v1;
+	vertexData[5].pos.x = x + w; vertexData[5].pos.y = y + h; vertexData[5].c.Set(0.f,0.f,0.f,0.f); vertexData[5].uv1.x = u2; vertexData[5].uv1.y = v2;
+	 
+	// Bind buffer as an vertex buffer so we can fill it with data
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*MAX_VERTEX, vertexData, GL_DYNAMIC_DRAW);
+
+	// Enable the user-defined vertex array
+	glEnableVertexAttribArray(VERTEX_ARRAY);
+
+	// Sets the vertex data to this attribute index, with the number of floats in each position
+	glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_TRUE, sizeof(Vertex), 0);
+	// Enable the user-defined vertex array
+	glEnableVertexAttribArray(COLOR_ARRAY);
+	// Sets the vertex data to this attribute index, with the number of floats in each position
+	glVertexAttribPointer(COLOR_ARRAY, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (float*)(sizeof(float)*3));
+
+
+	glEnableVertexAttribArray(UV_ARRAY);
+	// Sets the vertex data to this attribute index, with the number of floats in each position
+	glVertexAttribPointer(UV_ARRAY, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (float*)(sizeof(float)*7));
+
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisableVertexAttribArray(VERTEX_ARRAY);
+	glDisableVertexAttribArray(COLOR_ARRAY);
+	glDisableVertexAttribArray(UV_ARRAY);
+
+	//glDisable(GL_BLEND);
+	//glDisable(GL_TEXTURE_2D);
+}
 bool EndFrame()
 {
 		/*	Present the display data to the screen.

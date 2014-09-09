@@ -89,7 +89,7 @@ void n0Material::Bind()
 		texpArray[3]->Bind(GL_TEXTURE3);
 	if(texpArray[4])
 		texpArray[4]->Bind(GL_TEXTURE4);
-
+	glUseProgram(glProgramID);
 }
 
 }
