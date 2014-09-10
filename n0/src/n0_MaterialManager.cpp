@@ -51,7 +51,10 @@ namespace n0
 	void n0MaterialManager::AddMaterial(n0Material* _mat)
 	{
 		if(!GetMaterial(_mat->materialName))
+		{
 			m_MaterialArray.push_back(_mat);
+			_mat->Retain();
+		}
 	}
 
 

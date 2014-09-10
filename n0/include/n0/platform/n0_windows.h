@@ -63,7 +63,8 @@ namespace n0
 	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour);
 	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2);
 
-	void DrawTextureRect(float x, float y, float w, float h, n0Texture *Texture);
+	void DrawTexturedRect(float x, float y, float w, float h);
+	void DrawTexturedRect(float x, float y, float w, float h, float u1, float v1, float u2, float v2);
 	bool EndFrame();
 
 

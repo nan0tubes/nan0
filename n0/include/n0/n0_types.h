@@ -334,6 +334,7 @@ namespace n0
 	{
 		vec3f pos;
 		Colour4f c;
+		vec2f uv1;
 	};
 
 	static const int MAX_VERTEX = 512;
