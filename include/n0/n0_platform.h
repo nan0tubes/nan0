@@ -12,7 +12,7 @@
 
 #include "platform/n0_iphone.h"
 
-#elif define(n0_ANDROID)
+#elif defined(n0_ANDROID)
 
 #include "platform/n0_android.h"
 

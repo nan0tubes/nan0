@@ -37,13 +37,6 @@ void UIObject::Draw()
 		}
 	}
 
-#ifdef DEBUG
-	if(GetGame()->IsDebugRender())
-	{
-
-	}
-#endif
-
 }
 
 void UIObject::Update(u32 delta) 

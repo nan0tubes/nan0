@@ -12,7 +12,7 @@ struct n0Event
 
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, pData: %p", m_type, pData); }
 	n0Event(u32 type, void *data = 0) : pData(data),m_type(type) {} ;
-	enum EEventType{ n0Event_NoEvent = 0, n0Event_DefaultEvent, n0Event_DelayCallback};
+	enum EEventType{ Event_NoEvent = 0, Event_DefaultEvent, Event_DelayCallback};
 };
 
 class CallbackSpecBase

@@ -22,14 +22,15 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include "math.h"
 //
 
-#include <png.hpp>
-#include <json/json.h>
 
 #include "n0_types.h"
 #include "n0_Defines.h"
-
+#include "n0_vector.h"
+#include "n0_rect.h"
+#include "n0_vertex.h"
 
 
 #include "n0_Array.h"
@@ -48,6 +49,7 @@
 #include "n0_Material.h"
 #include "n0_MaterialManager.h"
 
+
 #include "n0_DelayTimer.h"
 #include "n0_File.h"
 #include "n0_graphics.h"
@@ -62,6 +64,6 @@
 #include "n0_scene.h"
 
 
-#include "ui\n0_ui.h"
+#include "ui/n0_ui.h"
 
 #endif // __n0_h__

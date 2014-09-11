@@ -48,7 +48,7 @@ public:
 			}
 			if(m_delays[i].timeRemaining < delta)
 			{
-				Event evt(Event::Event_DelayCallback,m_delays[i].pUserData);
+				n0Event evt(n0Event::Event_DelayCallback,m_delays[i].pUserData);
 				m_delays[i].cb.call(&evt);
 				m_delays[i].expired = 1;
 				m_delays[i].delayID = 0;

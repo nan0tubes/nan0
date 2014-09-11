@@ -40,185 +40,14 @@
 	typedef float f32;
 	typedef double f64;
 
+
+
 namespace n0
 {
 	//VEC2
-	template<class T>
-	class vec2
-	{
-	public:
-		T x;
-		T y;
+	
 
-	public:
-		vec2<T>() : x(0), y(0) { }
-		vec2<T>(const T & value) : x(value), y(value) { }
-		vec2<T>(const T & x, const T & y) : x(x), y(y) { }
-		vec2<T>(const vec2<T> & other) : x(other.x), y(other.y) { }
-
-		bool Equals(const vec2<T> & other) const { return x == other.x && y == other.y; }
-		bool IsBetweenPoints(const vec2<T> & begin, const vec2<T> & end) const { return (begin.x != end.x) ? ((begin.x <= x && x <= end.x) || (begin.x >= x && x >= end.x)) : ((begin.y <= y && y << end.y) || (begin.y >= y && y >= end.y)); }
-		T GetLength() const { return sqrt(x * x + y * y); }
-		T GetLengthSquared() const { return x * x + y * y; }
-		T DotProduct(const vec2<T> & other) const { return x * other.x + y * other.y; }
-		T GetDistanceFrom(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLength(); }
-		T GetDistanceFromSquared(const vec2<T> & other) const { return vec2<T>(x - other.x, y - other.y).GetLengthSquared(); }
-		vec2<T> GetInterpolated(const vec2<T> & other, f64 d) const { const inv = 1.0 - d; return vec2<T>((T)(other.x * onv + x * d), (T)(other.y * inv + y * d)); }
-		vec2<T> & Interpolate(const vec2<T> & a, const vec2<T> & b, f32 d) { x = (T)((f64)b.x + ((a.x - b.x) * d)); y = (T)((f64)b.y + ((a.y - b.y) * d)); return *this; }
-		vec2<T> & RotateByDeg(f64 degrees, const vec2<T> & center = vec2<T>())
-		{
-			degrees *= DEGTORAD64;
-			const f64 cs = cos(degrees);
-			const f64 sn = sin(degrees);
-			x -= center.x;
-			y -= center.y;
-			return *this;
-		}
-		vec2<T> & Normalize()
-		{
-			f32 length = (f32)(x * x + y * y);
-			if (length == 0)
-				return *this;
-			length = 1 / sqrt(length);
-			x = (T)(x * length);
-			y = (T)(y * length);
-			return *this;
-		}
-
-		bool operator==(const vec2<T> & other) const { return Equals(other); }
-		bool operator!=(const vec2<T> & other) const { return !Equals(other); }
-
-		vec2<T> & operator=(const vec2<T> & other) { x = other.x; y = other.y; return *this; }
-
-		vec2<T> operator-() const { return vec2<T>(-x, -y); }
-		vec2<T> & operator-=(const vec2<T> & other) { x -= other.x; y -= other.y; return *this; }
-		vec2<T> operator-(const T n) const { return vec2<T>(x - n, y - n); }
-		vec2<T> & operator-=(const T n) { x -= n; y -= n; return *this; }
-
-		vec2<T> operator+(vec2<T> & other) const { return vec2<T>(x + other.x, y + other.y); }
-		vec2<T> & operator+=(const vec2<T> & other) { x += other.x; y += other.y; return *this; }
-		vec2<T> operator+(const T n) const { return vec2<T>(x + n, y + n); }
-		vec2<T> & operator+=(const T n) { x += n; y += n; return *this; }
-
-		vec2<T> operator*(vec2<T> & other) const { return vec2<T>(x * other.x, y * other.y); }
-		vec2<T> & operator*=(const vec2<T> & other) { x *= other.x; y *= other.y; return *this; }
-		vec2<T> operator*(const T n) const { return vec2<T>(x * n, y * n); }
-		vec2<T> & operator*=(const T n) { x *= n; y *= n; return *this; }
-
-		vec2<T> operator/(vec2<T> & other) const { return vec2<T>(x / other.x, y / other.y); }
-		vec2<T> & operator/=(const vec2<T> & other) { x /= other.x; y /= other.y; return *this; }
-		vec2<T> operator/(const T n) const { return vec2<T>(x / n, y / n); }
-		vec2<T> & operator/=(const T n) { x /= n; y /= n; return *this; }
-	};
-
-	template<class T>
-	static vec2<T> operator+(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x + rhs.x, lhs.y + rhs.y); }
- 	template<class T>
-	static vec2<T> operator-(vec2<T> lhs, const vec2<T> & rhs) { return vec2<T>(lhs.x - rhs.x, lhs.y - rhs.y); }
-	template<class T>
- 	static vec2<T> operator*(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x * rhs.x, lhs.y * rhs.y); }
- 	template<class T>
- 	static vec2<T> operator/(vec2<T> lhs, const T & rhs) { return vec2<T>(lhs.x / rhs.x, lhs.y / rhs.y); }
- 
-	template<class T>
-	static bool operator==(const vec2<T> & lhs, const vec2<T> & rhs) { return lhs.Equals(rhs); }
-	template<class T>
-	static bool operator!=(const vec2<T> & lhs, const vec2<T> & rhs) { return !lhs.Equals(rhs); }
-
-	typedef vec2<s32> vec2i;
-	typedef vec2<u32> vec2u;
-	typedef vec2<f32> vec2f;
-
-	// VEC3
-	template<class T>
-	class vec3
-	{
-	public:
-		T x;
-		T y;
-		T z;
-
-	public:
-		vec3<T>() : x(0), y(0), z(0) { }
-		vec3<T>(const T & value) : x(value), y(value), z(value) { }
-		vec3<T>(const T & x, const T & y, const T & z) : x(x), y(y), z(z) { }
-		vec3<T>(const vec3<T> & other) : x(other.x), y(other.y), z(other.z) { }
-
-		bool Equals(const vec3<T> & other) const { return x == other.x && y == other.y && z == other.z; }
-//		bool IsBetweenPoints(const vec3<T> & begin, const vec3<T> & end) const;
-
-		vec3<T> & operator=(const vec3<T> & rhs) { x = rhs.x; y = rhs.y; z = rhs.z; return *this; }
-		vec3<T> & operator+=(const vec3<T> & rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
-		vec3<T> & operator-=(const vec3<T> & rhs) { x -= rhs.x; y -= rhs.y; z -= rhs.z; return *this; }
-	};
-
-	template<class T>
-	static vec3<T> operator+(vec3<T> lhs, const vec3<T> & rhs) { lhs += rhs; return lhs; }
-	template<class T>
-	static vec3<T> operator-(vec3<T> lhs, const vec3<T> & rhs) { lhs -= rhs; return lhs; }
-	template<class T>
-	static vec3<T> operator*(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
-	template<class T>
-	static vec3<T> operator/(vec3<T> lhs, const T & rhs) { return vec3<T>(lhs.x / rhs, lhs.y / rhs, lhs.z * rhs); }
-	template<class T>
-	static bool operator==(const vec3<T> & lhs, const vec3<T> & rhs) { return lhs.Equals(rhs); }
-	template<class T>
-	static bool operator!=(const vec3<T> & lhs, const vec3<T> & rhs) { return !operator==(lhs, rhs); }
-
-	typedef vec3<s32> vec3i;
-	typedef vec3<u32> vec3u;
-	typedef vec3<f32> vec3f;
-
-	// RECT
-	template<class T>
-	class rect
-	{
-	protected:
-		vec2<T> m_position;
-		vec2<T> m_dimensions;
-
-	public:
-		rect<T>() { }
-		rect<T>(const vec2<T> position, const vec2<T> dimensions) : m_position(position), m_dimensions(dimensions) { }
-		rect<T>(const rect<T> & other) : m_position(other.m_position), m_dimensions(other.m_dimensions) { }
-
-		rect<T> & operator=(const rect<T> & rhs) { m_position = rhs.m_position; m_dimensions= rhs.m_dimensions; return *this; }
-
-		// position
-		T * GetX() { return &m_position.x; }
-		T * GetY() { return &m_position.y; }
-		vec2<T> GetPosition() const { return m_position; }
-		virtual void SetPosition(const vec2<T> & position) { m_position = position; }
-		virtual void SetPosition(const T x, const T y) { m_position.x = x; m_position.y = y; }
-
-		// size
-		T * GetW() { return &m_dimensions.x; }
-		T * GetH() { return &m_dimensions.y; }
-		T GetWidth() const { return m_dimensions.x; }
-		void SetWidth(const T & width) { m_dimensions.x = width; }
-		T GetHeight() const { return m_dimensions.y; }
-		void SetHeight(const T & height) { m_dimensions.y = height; }
-		vec2<T> GetSize() const { return m_dimensions; }
-		void SetSize(const vec2<T> & dimensions) { m_dimensions = dimensions; }
-		void SetSize(const T x, const T y) { m_dimensions.x = x; m_dimensions.y = y; }
-
-		// utility
-		vec2<T> GetCenter() const { return m_dimensions / 2; }
-		T GetArea() const { return m_dimensions.x * m_dimensions.y; }
-		T GetPerimeter() const { return (m_dimensions.x << 1) + (m_dimensions.y << 1); }
-
-		bool Contains(const vec2<T> & pt) const { return Contains(pt.x, pt.y); }
-		bool Contains(const T x, const T y) const { return !(x < m_position.x || x > m_position.x + m_dimensions.x || y < m_position.y() || y > m_position.y + m_dimensions.y) }
-	};
-
-	template<class T>
-	static bool operator==(const rect<T> & lhs, const rect<T> & rhs) { return lhs.m_position == rhs.m_position && lhs.m_dimensions == rhs.m_dimensions; }
-	template<class T>
-	static bool operator!=(const rect<T> & lhs, const rect<T> & rhs) { return !operator==(lhs, rhs); }
-
-	typedef rect<s32> recti;
-	typedef rect<u32> rectu;
-	typedef rect<f32> rectf;
+	
 
 	// ANCHOR
 	class Anchor
@@ -330,12 +159,7 @@ namespace n0
 		Colour ToColour() const { return Colour((u32)(r * 255.0f), (u32)(g * 255.0f), (u32)( b * 255.0f), (u32)(a * 255.0f)); }
 	};
 
-	struct Vertex 
-	{
-		vec3f pos;
-		Colour4f c;
-		vec2f uv1;
-	};
+	
 
 	static const int MAX_VERTEX = 512;
 }
