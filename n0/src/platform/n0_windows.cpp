@@ -2,7 +2,9 @@
 
 namespace n0
 {
-
+	DWORD frameRate = 60;
+	DWORD lastFrame = 0;
+	GLfloat timeStamp = 0.16;
 	// Handles for the two shaders used to draw the triangle, and the program handle which combines them.
 	GLuint fragmentShader = 0, vertexShader = 0;
 	GLuint shaderProgram = 0;
@@ -759,6 +761,11 @@ bool InitialiseShaders( GLuint &fragmentShader, GLuint &vertexShader, GLuint &sh
 *******************************************************************************************************************************************/
 bool StartFrame( ) 
 {
+	DWORD ticksNow = GetTickCount64();
+	DWORD delta = ticksNow - lastFrame;
+	double diff = delta;
+	timeStamp = diff / 1000.f;
+	lastFrame = ticksNow;
 	/*	Set the clear color
 		At the start of a frame, generally you clear the image to tell OpenGL ES that you're done with whatever was there before and want to
 		draw a new frame. In order to do that however, OpenGL ES needs to know what colour to set in the image's place. glClearColor
@@ -892,9 +899,26 @@ bool EndFrame()
 	MSG eventMessage;
 	PeekMessage(&eventMessage, windows::nativeWindow, NULL, NULL, PM_REMOVE);
 	TranslateMessage(&eventMessage);
-	DispatchMessage(&eventMessage);
 
+	DispatchMessage(&eventMessage);
+	DWORD ticksNow = GetTickCount64();
+	DWORD delta = ticksNow - lastFrame;
+	if(delta < 1000 / frameRate)
+	{
+		Sleep(1000 / frameRate - delta);
+
+	}
 	return true;
+}
+
+
+float GetTicks()
+{
+	return timeStamp;
+}
+void SetFrameRate(u32 _frameRate)
+{
+	frameRate = _frameRate;
 }
 
 /*!*****************************************************************************************************************************************
