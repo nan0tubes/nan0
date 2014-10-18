@@ -45,9 +45,6 @@
 namespace n0
 {
 	//VEC2
-	
-
-	
 
 	// ANCHOR
 	class Anchor
