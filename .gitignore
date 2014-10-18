@@ -39,6 +39,8 @@ Thumbs.db
 #xcode
 xcuserdata
 xcshareddata
+
+#visual studio
 *.ipch
 *.opensdf
 *.sdf
@@ -51,22 +53,27 @@ xcshareddata
 *.lib
 *.suo
 
+# Some things for irrKlang #
+############################
+
 lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/*.txt
-lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/
-!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*.dll
-!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*.dylib
-!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*.so
+lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*/*
+!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*/*.dll
+!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*/*.dylib
+!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/bin/*/*.so
 lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/doc/
 lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/examples/
 lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/examples.net/
+!lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/lib/**
 lib/irrKlang1.5.0/irrKlang-32bit-1.5.0/media/
 
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/*.txt
-lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/
-!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*.dll
-!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*.dylib
-!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*.so
+lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*/*
+!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*/*.dll
+!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*/*.dylib
+!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/bin/*/*.so
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/doc/
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/examples/
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/examples.net/
+!lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/lib/**
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/media/
