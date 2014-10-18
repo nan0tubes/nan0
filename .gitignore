@@ -42,3 +42,11 @@ xcshareddata
 *.ipch
 *.opensdf
 *.sdf
+*.tlog
+*.obj
+*.lastbuildstate
+*.idb
+*.pdb
+*.cache
+*.lib
+*.suo
