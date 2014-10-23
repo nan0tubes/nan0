@@ -3,6 +3,7 @@
 *.com
 *.class
 *.dll
+*.lib
 *.exe
 *.o
 *.so
@@ -50,8 +51,8 @@ xcshareddata
 *.idb
 *.pdb
 *.cache
-*.lib
 *.suo
+*.user
 
 # Some things for irrKlang #
 ############################
@@ -77,3 +78,9 @@ lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/examples/
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/examples.net/
 !lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/lib/**
 lib/irrKlang1.5.0/irrKlang-64bit-1.5.0/media/
+
+# Some other things for SDL #
+#############################
+
+!lib/SDL2-2.0.3/lib/*/*.dll
+!lib/SDL2-2.0.3/lib/*/*.lib
