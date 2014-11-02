@@ -7,10 +7,6 @@
 #include "windows.h"
 #include <tchar.h>
 
-
-#include <png.hpp>
-#include <json/json.h>
-
 #include "GLES2\gl2.h"
 #include "GLES2\gl2ext.h"
 

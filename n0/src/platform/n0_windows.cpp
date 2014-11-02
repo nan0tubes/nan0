@@ -929,10 +929,10 @@ bool StartFrame( )
 
 	// Pass the transformationMatrix to the shader using its location
 	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
-	if (!windows::TestGLError(windows::nativeWindow, "glUniformMatrix4fv"))
-	{
-		return false;
-	}
+// 	if (!windows::TestGLError(windows::nativeWindow, "glUniformMatrix4fv"))
+// 	{
+// 		return false;
+// 	}
 
 	return true;
 }
