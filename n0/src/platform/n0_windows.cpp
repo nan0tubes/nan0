@@ -2,9 +2,9 @@
 
 namespace n0
 {
-	DWORD frameRate = 60;
-	DWORD lastFrame = 0;
-	GLfloat timeStamp = 0.16;
+	double frameRate = 60;
+	ULONGLONG lastFrame = 0;
+	double timeStamp = 0.16;
 	// Handles for the two shaders used to draw the triangle, and the program handle which combines them.
 	GLuint fragmentShader = 0, vertexShader = 0;
 	GLuint shaderProgram = 0, textureShader = 0;
@@ -128,6 +128,18 @@ namespace n0
 					n0InputEvents::GetInstance()->OnEvent(&evt);
 				}
 				break;
+
+			case WM_KEYDOWN:
+				{
+					u32 wasDown = (longWindowParameters & (1 << 29));
+					SKeyEvent evt((wasDown != 0) ? SKeyEvent::kEvent_KeyRepeat : SKeyEvent::kEvent_KeyDown, windowParameters);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
+			case WM_KEYUP:
+				{
+					SKeyEvent evt(SKeyEvent::kEvent_KeyUp,windowParameters);
+					n0InputEvents::GetInstance()->OnEvent(&evt);
+				}
 			}
 
 			
@@ -898,41 +910,25 @@ bool InitialiseShaders( GLuint &fragmentShader, GLuint &vertexShader, GLuint &sh
 *******************************************************************************************************************************************/
 bool StartFrame( ) 
 {
-	DWORD ticksNow = GetTickCount64();
-	DWORD delta = ticksNow - lastFrame;
-	double diff = delta;
-	timeStamp = diff / 1000.f;
+	ULONGLONG ticksNow = GetTickCount64();
+	ULONGLONG delta = ticksNow - lastFrame;
+	double diff = (double)delta;
+	timeStamp = diff / 1000;
 	lastFrame = ticksNow;
-	/*	Set the clear color
-		At the start of a frame, generally you clear the image to tell OpenGL ES that you're done with whatever was there before and want to
-		draw a new frame. In order to do that however, OpenGL ES needs to know what colour to set in the image's place. glClearColor
-		sets this value as 4 floating point values between 0.0 and 1.0, as the Red, Green, Blue and Alpha channels. Each value represents
-		the intensity of the particular channel, with all 0.0 being transparent black, and all 1.0 being opaque white. Subsequent calls to
-		glClear with the colour bit will clear the frame buffer to this value.
-		The functions glClearDepth and glClearStencil allow an application to do the same with depth and stencil values respectively.
-	*/
+
+
 	glClearColor(0.6f, 0.8f, 1.0f, 1.0f);
 	glDisable(GL_CULL_FACE);
-	/*	Clears the color buffer.
-		glClear is used here with the Colour Buffer to clear the colour. It can also be used to clear the depth or stencil buffer using 
-		GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT, respectively.
-	*/
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// Get the location of the transformation matrix in the shader using its name
+	glUseProgram(shaderProgram);
 	int matrixLocation = glGetUniformLocation(shaderProgram, "transformationMatrix");
-
-	// Pass the transformationMatrix to the shader using its location
 	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
 
-	matrixLocation = glGetUniformLocation(textureShader, "transformationMatrix");
-
-	// Pass the transformationMatrix to the shader using its location
-	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
-// 	if (!windows::TestGLError(windows::nativeWindow, "glUniformMatrix4fv"))
-// 	{
-// 		return false;
-// 	}
+	if (!windows::TestGLError(windows::nativeWindow, "glUniformMatrix4fv"))
+	{
+		return false;
+	}
 
 	return true;
 }
@@ -1031,6 +1027,11 @@ void DrawTexturedRect(float x, float y, float w, float h,float u1, float v1, flo
 	while(glGetError());
 	glUseProgram(textureShader);
 	windows::TestEGLError(windows::nativeWindow,"glUseProgram");
+
+	int matrixLocation = glGetUniformLocation(textureShader, "transformationMatrix");
+	glUniformMatrix4fv( matrixLocation, 1, GL_FALSE, transformationMatrix);
+	windows::TestEGLError(windows::nativeWindow,"");
+
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(TEX_UNI,0);
 	glEnable(GL_BLEND);
@@ -1090,15 +1091,26 @@ bool EndFrame()
 	}
 
 	// Check for messages from the windowing system. These will pass through the callback registered earlier.
-	MSG eventMessage;
+	MSG eventMessage;	//Always process at LEAST one message per frame
 	PeekMessage(&eventMessage, windows::nativeWindow, NULL, NULL, PM_REMOVE);
 	TranslateMessage(&eventMessage);
-
 	DispatchMessage(&eventMessage);
-	DWORD ticksNow = GetTickCount64();
-	DWORD delta = ticksNow - lastFrame;
-	if(delta < 1000 / frameRate)
-	{
+
+	ULONGLONG ticksNow = GetTickCount64();
+	ULONGLONG delta = ticksNow - lastFrame;
+
+	double frameTime = 1000 / frameRate;
+
+	while(delta < frameTime && PeekMessage(&eventMessage, windows::nativeWindow, NULL, NULL, PM_REMOVE))
+	{ //Process as much as possible while there is time remaining in a frame
+		TranslateMessage(&eventMessage);
+		DispatchMessage(&eventMessage);
+		ticksNow = GetTickCount64();
+		delta = ticksNow - lastFrame;
+	}
+
+	if(delta < frameTime)
+	{ //And sleep whatever is remaining
 		Sleep(1000 / frameRate - delta);
 
 	}

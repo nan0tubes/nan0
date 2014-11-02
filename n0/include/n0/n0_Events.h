@@ -54,12 +54,12 @@ private:
 
 
 //KeyEvent is just an example of the event design, key events are actually processed by irrlicht in most cases
-struct KeyEvent : public n0Event
+struct SKeyEvent : public n0Event
 {
 	u32 m_keyCode;
 
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, Key %u, pData: %p", m_type, m_keyCode, pData); }
-	KeyEvent(u32 type, u32 keyCode, void *data =0 ) : n0Event(type,data), m_keyCode(keyCode) {}
+	SKeyEvent(u32 type, u32 keyCode, void *data =0 ) : n0Event(type,data), m_keyCode(keyCode) {}
 	enum EKeyEvent{ kEvent_KeyDown = 100,kEvent_KeyUp, kEvent_KeyRepeat, kEvent_KeyCount};
 };
 
