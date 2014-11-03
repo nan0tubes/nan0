@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "n0Engine", "..\..\n0\proj\vs2010\n0Engine\n0Engine.vcxproj", "{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KorthallGame", "KorthallGame.vcxproj", "{2E5154ED-E43B-4417-A170-C9ADC4FDD506}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6} = {A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}.Debug|Win32.Build.0 = Debug|Win32
+		{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}.Release|Win32.ActiveCfg = Release|Win32
+		{A6A7A9EA-32A2-465C-B7D6-E03A07A2B9F6}.Release|Win32.Build.0 = Release|Win32
+		{2E5154ED-E43B-4417-A170-C9ADC4FDD506}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E5154ED-E43B-4417-A170-C9ADC4FDD506}.Debug|Win32.Build.0 = Debug|Win32
+		{2E5154ED-E43B-4417-A170-C9ADC4FDD506}.Release|Win32.ActiveCfg = Release|Win32
+		{2E5154ED-E43B-4417-A170-C9ADC4FDD506}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
