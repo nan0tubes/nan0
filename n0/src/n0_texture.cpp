@@ -29,13 +29,13 @@ n0Texture::n0Texture(u32 texID, u32 texWidth, u32 texHeight, u32 bpp, u32 colors
 	u32 val2 = 0xff0000FF;
 	u32 * fakeData = (u32*)malloc(texWidth*texHeight * sizeof(u32));
 
-	for(int y = 0; y < texHeight ; y++)
+	for(u32 y = 0; y < texHeight ; y++)
 	{
 		if(y%16 == 0)
 		{
 			SWAP(val,val2);
 		}
-		for(int x = 0; x < texWidth ; x++)
+		for(u32 x = 0; x < texWidth ; x++)
 		{
 			if(x%16 == 0)
 			{

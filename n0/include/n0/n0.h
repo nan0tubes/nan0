@@ -22,6 +22,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <set>
 #include "math.h"
 //
 
@@ -58,7 +59,7 @@
 
 #include "n0_InputEvents.h"
 
-
+#include "n0_ScreenElement.h"
 
 
 #include "n0_scene.h"
@@ -66,4 +67,7 @@
 
 #include "ui/n0_ui.h"
 
+
+#include "n0_Tween.h"
+#include "n0_TweenManager.h"
 #endif // __n0_h__

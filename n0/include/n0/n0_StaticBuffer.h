@@ -1,6 +1,4 @@
 
-
-
 #ifndef __FW_STATIC_BUFFER_H__
 #define __FW_STATIC_BUFFER_H__
 

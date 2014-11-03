@@ -43,6 +43,14 @@ bool n0InputEvents::OnEvent(n0Event *_evt)
 	std::vector<InputEvent>::iterator it;
 	for(it = m_triggerEvents.begin(); it != m_triggerEvents.end(); it++)
 	{
+		if(SKeyEvent::IsKeyEvent(_evt->m_type) )
+		{	//Filtering key events by their key value
+			SKeyEvent* keyEvent = static_cast<SKeyEvent*>(_evt);
+			if(!keyEvent || keyEvent->m_keyCode != it->triggerVal )
+			{
+				continue;
+			}
+		}
 		if(_evt->m_type == it->triggerID)
 		{
 			n0Event evt(it->eventName,it->data != NULL ? it->data : _evt->pData);

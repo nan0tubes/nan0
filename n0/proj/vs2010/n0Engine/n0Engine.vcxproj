@@ -102,9 +102,12 @@
     <ClInclude Include="..\..\..\include\n0\n0_platform.h" />
     <ClInclude Include="..\..\..\include\n0\n0_RefCounted.h" />
     <ClInclude Include="..\..\..\include\n0\n0_scene.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_ScreenElement.h" />
     <ClInclude Include="..\..\..\include\n0\n0_StaticBuffer.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Texture.h" />
     <ClInclude Include="..\..\..\include\n0\n0_TextureManager.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_Tween.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_TweenManager.h" />
     <ClInclude Include="..\..\..\include\n0\n0_types.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_android.h" />
     <ClInclude Include="..\..\..\include\n0\platform\n0_iphone.h" />
@@ -125,9 +128,12 @@
     <ClCompile Include="..\..\..\src\n0_MaterialManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_RefManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_Scene.cpp" />
+    <ClCompile Include="..\..\..\src\n0_ScreenElement.cpp" />
     <ClCompile Include="..\..\..\src\n0_StaticBuffer.cpp" />
     <ClCompile Include="..\..\..\src\n0_texture.cpp" />
     <ClCompile Include="..\..\..\src\n0_TextureManager.cpp" />
+    <ClCompile Include="..\..\..\src\n0_Tween.cpp" />
+    <ClCompile Include="..\..\..\src\n0_TweenManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_Types.cpp" />
     <ClCompile Include="..\..\..\src\platform\n0_windows.cpp" />
     <ClCompile Include="..\..\..\src\UI\n0_UIButton.cpp" />

@@ -56,7 +56,7 @@ namespace n0
 	void DeInitialiseGLState( GLuint fragmentShader, GLuint vertexShader, GLuint shaderProgram, GLuint vertexBuffer ) ;
 
 	bool StartFrame();
-	float GetTicks(); // Get number of seconds of the last frame.
+	double GetTicks(); // Get number of seconds of the last frame.
 	void SetFrameRate(u32 frameRate); // used to limit Framerate of the game.
 	void DrawRect(float x, float y, float w, float h, Colour4f colour);
 	void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f colourNE, Colour4f colourSE, Colour4f colourSW);

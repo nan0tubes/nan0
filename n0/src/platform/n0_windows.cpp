@@ -135,11 +135,13 @@ namespace n0
 					SKeyEvent evt((wasDown != 0) ? SKeyEvent::kEvent_KeyRepeat : SKeyEvent::kEvent_KeyDown, windowParameters);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
 				}
+				break;
 			case WM_KEYUP:
 				{
 					SKeyEvent evt(SKeyEvent::kEvent_KeyUp,windowParameters);
 					n0InputEvents::GetInstance()->OnEvent(&evt);
 				}
+				break;
 			}
 
 			
@@ -1111,14 +1113,14 @@ bool EndFrame()
 
 	if(delta < frameTime)
 	{ //And sleep whatever is remaining
-		Sleep(1000 / frameRate - delta);
+		Sleep(frameTime - delta);
 
 	}
 	return true;
 }
 
 
-float GetTicks()
+double GetTicks()
 {
 	return timeStamp;
 }

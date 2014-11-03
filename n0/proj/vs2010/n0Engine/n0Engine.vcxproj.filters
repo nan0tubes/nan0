@@ -28,6 +28,9 @@
     <Filter Include="Source Files\externals">
       <UniqueIdentifier>{39f418b6-6bc5-46ea-9367-c569e6d8cb89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\visual">
+      <UniqueIdentifier>{d172ffda-8485-4781-8671-36ae3f6147fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\n0\n0.h">
@@ -129,6 +132,15 @@
     <ClInclude Include="..\..\..\include\n0\n0_MaterialManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_ScreenElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_Tween.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_TweenManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\n0_mutex.cpp">
@@ -178,6 +190,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\lib\jsoncpp\jsoncpp.cpp">
       <Filter>Source Files\externals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_ScreenElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_Tween.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_TweenManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

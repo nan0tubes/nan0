@@ -9,14 +9,26 @@ class Fixme : public n0::IEventListener
 public:
 	Fixme() {}
 	~Fixme() {}
-	bool OnEvent(n0::n0Event *_evt) 
+	bool OnEvent(n0::n0Event *evt)
 	{
+		return false;
+	}
+	bool OnMouseEvent(n0::n0Event *_evt) 
+	{
+		n0_ASSERT(Hash("TargetClick") == _evt->m_type, "Events are not appearing as they should (OnMouseEvent)");
 		n0::SMouseEvent * pEvt = (n0::SMouseEvent *)_evt;
 		n0::SMouseEventData * pEvtData = (n0::SMouseEventData *)pEvt->pData;
-
 		printf("Mouse Click at %d,%d\n",pEvtData->x, pEvtData->y);
 		return true;
 	}
+	bool OnKeyEvent(n0::n0Event *_evt) 
+	{
+		n0_ASSERT(Hash("theE") == _evt->m_type, "Events are not appearing as they should (OnKeyEvent)");
+
+		printf("E Pressed \n");
+		return true;
+	}
+
 
 };
 
@@ -29,10 +41,12 @@ int main()
 	n0::windows::InitSystem(NULL,screenW,screenH);
 
 	n0::SetFrameRate(30);
-
+	Fixme *evtListener = new Fixme();
 	n0::n0Texture * pTex = n0::n0TextureManager::GetInstance()->GenerateTexture(1,256,256);
 	n0::n0InputEvents::GetInstance()->RegisterInputEvent(n0::SMouseEvent::kEvent_LeftMBDown,0,"TargetClick",NULL);
-	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("TargetClick"),new Fixme(),&Fixme::OnEvent,Hash("fixMeEvent"));
+	n0::n0InputEvents::GetInstance()->RegisterInputEvent(n0::SKeyEvent::kEvent_KeyDown,'E',"theE",NULL);
+	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("TargetClick"),evtListener,&Fixme::OnMouseEvent,Hash("fixMeClickEvent"));
+	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("theE"),evtListener,&Fixme::OnKeyEvent,Hash("fixMeKeyEvent"));
 
 	while(! n0::windows::UserQuitMsg())
 	{
@@ -43,7 +57,7 @@ int main()
 
 		n0::EndFrame();
 	}
-
+	delete evtListener;
 	return 0;
 
 }
@@ -106,7 +120,7 @@ u32 Hash(const char *inputStr)
 
 	while(*str)
 	{
-		hashVal = ((hashVal << 5) + hashVal) + (u32)*str;
+		hashVal = (hashVal << 5) + (u32)*str;
 		str++;
 	}
 

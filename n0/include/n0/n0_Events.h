@@ -59,6 +59,7 @@ struct SKeyEvent : public n0Event
 	u32 m_keyCode;
 
 	virtual void GetLog(char *buf, u32 maxLen) { snprintf(buf, maxLen, "Type: %u, Key %u, pData: %p", m_type, m_keyCode, pData); }
+	static inline bool IsKeyEvent(u32 evtType) { return evtType >= kEvent_KeyDown && evtType < kEvent_KeyCount; }
 	SKeyEvent(u32 type, u32 keyCode, void *data =0 ) : n0Event(type,data), m_keyCode(keyCode) {}
 	enum EKeyEvent{ kEvent_KeyDown = 100,kEvent_KeyUp, kEvent_KeyRepeat, kEvent_KeyCount};
 };
