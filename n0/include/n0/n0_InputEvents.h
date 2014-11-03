@@ -25,6 +25,7 @@ public:
 	virtual bool OnEvent(n0Event *);
 
 	virtual void RegisterInputEvent( unsigned int triggerEventID, unsigned int triggerEventData,char *eventName, void *pUserData);
+	virtual void DeRegisterInputEvent( char *eventName );
 
 
 static n0InputEvents * GetInstance();

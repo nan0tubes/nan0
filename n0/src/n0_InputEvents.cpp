@@ -2,6 +2,7 @@
 
 namespace n0
 {
+
 n0InputEvents * n0InputEvents::s_Instance = NULL;
 
 
@@ -75,6 +76,20 @@ void n0InputEvents::RegisterInputEvent( unsigned int triggerEventID, unsigned in
 
 }
 
-
-
+void n0InputEvents::DeRegisterInputEvent( char *_eventName)
+{
+	u32 eventName = Hash(_eventName);
+	std::vector<InputEvent>::iterator it;
+	for(it = m_triggerEvents.begin(); it != m_triggerEvents.end(); it++)
+	{
+		if(it->eventName == eventName)
+		{
+			it = m_triggerEvents.erase(it);
+			it = m_triggerEvents.begin();
+		}
+	}
 }
+
+
+
+} // Namespace n0
