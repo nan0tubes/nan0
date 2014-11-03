@@ -935,12 +935,12 @@ bool StartFrame( )
 	return true;
 }
 
-void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour)
+void DrawLine(float x1, float y1, float x2, float y2, Colour colour)
 {
 	DrawLine(x1, y1, x2, y2, colour, colour);
 }
 
-void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2)
+void DrawLine(float x1, float y1, float x2, float y2, Colour colour1, Colour colour2)
 {
 	vertexData[0].pos.x = x1; vertexData[0].pos.y = y1; vertexData[0].c.Set(colour1);
 	vertexData[1].pos.x = x2; vertexData[1].pos.y = y2; vertexData[1].c.Set(colour2);
@@ -969,12 +969,12 @@ void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f
 	glDisableVertexAttribArray(VERTEX_ARRAY);
 	glDisableVertexAttribArray(COLOR_ARRAY);
 }
-void DrawRect(float x, float y, float w, float h, Colour4f colour)
+void DrawRect(float x, float y, float w, float h, Colour colour)
 {
 	DrawRect(x, y, w, h, colour, colour, colour, colour);
 }
 
-void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f colourNE, Colour4f colourSE, Colour4f colourSW)
+void DrawRect(float x, float y, float w, float h, Colour colourNW, Colour colourNE, Colour colourSE, Colour colourSW)
 {
 	memset(vertexData,0,sizeof(Vertex)*MAX_VERTEX);
 	glUseProgram(shaderProgram);

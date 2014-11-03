@@ -58,10 +58,10 @@ namespace n0
 	bool StartFrame();
 	double GetTicks(); // Get number of seconds of the last frame.
 	void SetFrameRate(u32 frameRate); // used to limit Framerate of the game.
-	void DrawRect(float x, float y, float w, float h, Colour4f colour);
-	void DrawRect(float x, float y, float w, float h, Colour4f colourNW, Colour4f colourNE, Colour4f colourSE, Colour4f colourSW);
-	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour);
-	void DrawLine(float x1, float y1, float x2, float y2, Colour4f colour1, Colour4f colour2);
+	void DrawRect(float x, float y, float w, float h, Colour colour);
+	void DrawRect(float x, float y, float w, float h, Colour colourNW, Colour colourNE, Colour colourSE, Colour colourSW);
+	void DrawLine(float x1, float y1, float x2, float y2, Colour colour);
+	void DrawLine(float x1, float y1, float x2, float y2, Colour colour1, Colour colour2);
 
 	void DrawTexturedRect(float x, float y, float w, float h);
 	void DrawTexturedRect(float x, float y, float w, float h, float u1, float v1, float u2, float v2);

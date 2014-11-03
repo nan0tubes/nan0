@@ -14,8 +14,6 @@ namespace n0
 		val = 1<<i;
 	}
 
-#define SWAP( x, y) { x ^= y; y ^= x; x ^= y;}
-
 n0Texture::n0Texture(u32 texID, u32 texWidth, u32 texHeight, u32 bpp, u32 colorspace)
 	:width(texWidth), height(texHeight), textureID(texID), bpp(bpp), colorspace(colorspace)
 {

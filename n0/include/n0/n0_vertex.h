@@ -16,7 +16,7 @@ namespace n0
     struct Vertex
     {
         vec3f pos;
-        Colour4f c;
+        Colour c;
         vec2f uv1;
     };
     
