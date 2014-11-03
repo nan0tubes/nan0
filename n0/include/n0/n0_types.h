@@ -49,7 +49,7 @@ namespace n0
 	// ANCHOR
 	class Anchor
 	{
-	private:
+	public:
 		// DON'T USE THE BASE ANCHORS FOR POSITIONING
 		static const u8 TOP         = (1 << 0);
 		static const u8 VCENTER     = (1 << 1);
@@ -57,7 +57,6 @@ namespace n0
 		static const u8 LEFT        = (1 << 3);
 		static const u8 HCENTER     = (1 << 4);
 		static const u8 RIGHT       = (1 << 5);
-	public:
 		// USE THESE FANCILY NAMED ONES INSTEAD
 		static const u8 TOPLEFT     = TOP | LEFT;
 		static const u8 TOPCENTER   = TOP | HCENTER;

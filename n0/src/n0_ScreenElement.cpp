@@ -5,7 +5,7 @@ namespace n0
 {
 	ScreenElement::ScreenElement()
 		: m_anchor(Anchor::BOTTOMLEFT)
-		, m_backgroundColour(0xffffffff)
+		, m_backgroundColour(0xffffffff, Colour::ColourFormat_RGBA)
 		, m_isVisible(true)
 		, m_pParent(NULL)
 	{
@@ -53,7 +53,7 @@ namespace n0
 
 		DrawRect(m_screenBottomLeft.x, m_screenBottomLeft.y, m_dimensions.x, m_dimensions.y, m_backgroundColour);
 #ifdef _DEBUG
-		Colour c = ~m_backgroundColour.GetValue();
+		Colour c(~m_backgroundColour.GetAsInt(Colour::ColourFormat_RGBA), Colour::ColourFormat_RGBA);
 		DrawLine(m_screenBottomLeft.x, m_screenBottomLeft.y, m_screenBottomLeft.x + m_dimensions.x, m_screenBottomLeft.y, c); // top
 		DrawLine(m_screenBottomLeft.x, m_screenBottomLeft.y, m_screenBottomLeft.x + m_dimensions.x, m_screenBottomLeft.y + m_dimensions.y, c); // diagonally down
 		DrawLine(m_screenBottomLeft.x, m_screenBottomLeft.y, m_screenBottomLeft.x, m_screenBottomLeft.y + m_dimensions.y, c); // left
