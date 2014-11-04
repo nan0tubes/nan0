@@ -31,8 +31,8 @@
 #include "n0_Defines.h"
 #include "n0_vector.h"
 #include "n0_rect.h"
+#include "n0_colour.h"
 #include "n0_vertex.h"
-
 
 #include "n0_Array.h"
 #include "n0_Class.h"

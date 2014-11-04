@@ -90,6 +90,7 @@
     <ClInclude Include="..\..\..\include\n0\n0.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Array.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Class.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_colour.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Defines.h" />
     <ClInclude Include="..\..\..\include\n0\n0_DelayTimer.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Events.h" />
@@ -122,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\lib\jsoncpp\jsoncpp.cpp" />
+    <ClCompile Include="..\..\..\src\n0_colour.cpp" />
     <ClCompile Include="..\..\..\src\n0_InputEvents.cpp" />
     <ClCompile Include="..\..\..\src\n0_Material.cpp" />
     <ClCompile Include="..\..\..\src\n0_mutex.cpp" />
