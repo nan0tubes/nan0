@@ -56,6 +56,7 @@
 #include "n0_graphics.h"
 #include "n0_Mutex.h"
 #include "n0_StaticBuffer.h"
+#include "n0_AudioManager.h"
 
 #include "n0_InputEvents.h"
 

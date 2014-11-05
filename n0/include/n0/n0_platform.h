@@ -2,7 +2,8 @@
 #ifndef __N0_PLATFORM_H__
 #define __N0_PLATFORM_H__
 
-
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 #if  defined(_WIN32)
 #include "platform/n0_windows.h"

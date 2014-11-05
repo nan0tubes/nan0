@@ -41,7 +41,7 @@ public:
 
 };
 
-int main()
+int main(int arc, char * argv[])
 {
 
 	int bitDepth = 24;
@@ -59,6 +59,13 @@ int main()
 	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("theE"),evtListener,&Fixme::OnKeyEvent,Hash("fixMeKeyEvent"));
 	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("Mmove"),evtListener,&Fixme::OnMouseMoveEvent,Hash("mouseMoveEvent"));
 
+	n0AudioManager * pAudio = new n0AudioManager();
+
+	if (pAudio && pAudio->pMusic && Mix_PlayingMusic() == 0)
+	{
+		Mix_PlayMusic(pAudio->pMusic, -1);
+	}
+
 	while(! n0::windows::UserQuitMsg())
 	{
 		n0::StartFrame();
@@ -68,6 +75,10 @@ int main()
 
 		n0::EndFrame();
 	}
+
+	if (pAudio)
+		delete pAudio;
+
 	delete evtListener;
 	return 0;
 

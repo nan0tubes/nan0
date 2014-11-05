@@ -52,15 +52,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/SDL2-2.0.3/include;$(ProjectDir)../../../../lib/zlib-1.2.8/include;$(ProjectDir)../../../../lib/png;$(ProjectDir)../../../../lib/png/png++;$(ProjectDir)../../../../lib/jsoncpp;$(ProjectDir)../../../include/;$(ProjectDir)../../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/SDL2-2.0.3/include;$(ProjectDir)../../../../lib/SDL2_mixer-2.0.0/include;$(ProjectDir)../../../../lib/zlib-1.2.8/include;$(ProjectDir)../../../../lib/png;$(ProjectDir)../../../../lib/png/png++;$(ProjectDir)../../../../lib/jsoncpp;$(ProjectDir)../../../include/;$(ProjectDir)../../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib\openGLES\lib\x86_32;$(ProjectDir)../../../../lib/SDL2-2.0.3/lib/x86;$(ProjectDir)../../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng.lib;SDL2.lib;SDL2main.lib;libEGL.lib;libGLESv2.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib\openGLES\lib\x86_32;$(ProjectDir)../../../../lib/SDL2-2.0.3/lib/x86;$(ProjectDir)../../../../lib/SDL2_mixer-2.0.0/lib/x86;$(ProjectDir)../../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpng.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;libEGL.lib;libGLESv2.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../lib/SDL2-2.0.3/include;$(ProjectDir)../../../lib/zlib-1.2.8/include;$(ProjectDir)../../../lib/png;$(ProjectDir)../../../lib/png/png++;$(ProjectDir)../../../lib/jsoncpp;$(ProjectDir)../../../include/;$(ProjectDir)../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/SDL2-2.0.3/include;$(ProjectDir)../../../../lib/SDL2_mixer-2.0.0/include;$(ProjectDir)../../../../lib/zlib-1.2.8/include;$(ProjectDir)../../../../lib/png;$(ProjectDir)../../../../lib/png/png++;$(ProjectDir)../../../../lib/jsoncpp;$(ProjectDir)../../../include/;$(ProjectDir)../../../../lib/openGLES/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -78,8 +78,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib\openGLES\lib\x86_32;$(ProjectDir)../../../../lib/SDL2-2.0.3/lib/x86;$(ProjectDir)../../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpng.lib;SDL2.lib;SDL2main.lib;libEGL.lib;libGLESv2.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib\openGLES\lib\x86_32;$(ProjectDir)../../../../lib/SDL2-2.0.3/lib/x86;$(ProjectDir)../../../../lib/SDL2_mixer-2.0.0/lib/x86;$(ProjectDir)../../../../lib/png/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpng.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;libEGL.lib;libGLESv2.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -89,6 +89,7 @@
     <ClInclude Include="..\..\..\include\n0\IUpdateable.h" />
     <ClInclude Include="..\..\..\include\n0\n0.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Array.h" />
+    <ClInclude Include="..\..\..\include\n0\n0_AudioManager.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Class.h" />
     <ClInclude Include="..\..\..\include\n0\n0_colour.h" />
     <ClInclude Include="..\..\..\include\n0\n0_Defines.h" />
@@ -123,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\lib\jsoncpp\jsoncpp.cpp" />
+    <ClCompile Include="..\..\..\src\n0_AudioManager.cpp" />
     <ClCompile Include="..\..\..\src\n0_colour.cpp" />
     <ClCompile Include="..\..\..\src\n0_InputEvents.cpp" />
     <ClCompile Include="..\..\..\src\n0_Material.cpp" />

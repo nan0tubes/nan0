@@ -144,6 +144,9 @@
     <ClInclude Include="..\..\..\include\n0\n0_colour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\n0\n0_AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\n0_mutex.cpp">
@@ -204,6 +207,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\n0_colour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\n0_AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

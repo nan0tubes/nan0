@@ -217,6 +217,20 @@ namespace n0
 			{
 				return false;
 			}
+
+			// Init SDL
+			if (SDL_Init(SDL_INIT_AUDIO) < 0)
+			{
+				n0_ASSERT(false, "SDL could not initialize! SDL Error: %s\v", SDL_GetError());
+				return false;
+			}
+			// Init SDL_mixer
+			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+			{
+				n0_ASSERT(false, "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+				return false;
+			}
+
 			return true;
 		}
 
@@ -510,6 +524,9 @@ namespace n0
 		
 		void CleanUp(bool didInit)
 		{
+
+			Mix_Quit();
+			SDL_Quit();
 
 			if(didInit)
 				DeInitialiseGLState(fragmentShader, vertexShader, shaderProgram, vertexBuffer);
