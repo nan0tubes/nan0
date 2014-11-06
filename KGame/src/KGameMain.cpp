@@ -59,12 +59,8 @@ int main(int arc, char * argv[])
 	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("theE"),evtListener,&Fixme::OnKeyEvent,Hash("fixMeKeyEvent"));
 	n0::n0InputEvents::GetInstance()->RegisterEventListener(Hash("Mmove"),evtListener,&Fixme::OnMouseMoveEvent,Hash("mouseMoveEvent"));
 
+	// create audio manager, which will init and manager SDL_audio / SDL_mixer
 	n0AudioManager * pAudio = new n0AudioManager();
-
-	if (pAudio && pAudio->pMusic && Mix_PlayingMusic() == 0)
-	{
-		Mix_PlayMusic(pAudio->pMusic, -1);
-	}
 
 	while(! n0::windows::UserQuitMsg())
 	{
@@ -76,8 +72,12 @@ int main(int arc, char * argv[])
 		n0::EndFrame();
 	}
 
+	// cleanup
 	if (pAudio)
+	{
 		delete pAudio;
+		pAudio = NULL;
+	}
 
 	delete evtListener;
 	return 0;

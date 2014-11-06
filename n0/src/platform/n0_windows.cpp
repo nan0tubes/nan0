@@ -218,19 +218,6 @@ namespace n0
 				return false;
 			}
 
-			// Init SDL
-			if (SDL_Init(SDL_INIT_AUDIO) < 0)
-			{
-				n0_ASSERT(false, "SDL could not initialize! SDL Error: %s\v", SDL_GetError());
-				return false;
-			}
-			// Init SDL_mixer
-			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-			{
-				n0_ASSERT(false, "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-				return false;
-			}
-
 			return true;
 		}
 
